@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 // Import Speech Recognition Module (Week 2: Voice Recognition)
 import 'package:healthcare_assistant/services/speech_service.dart';
 
+// Import Authentication Module (register / login / saved profile)
+import 'package:healthcare_assistant/services/auth_service.dart';
+import 'package:healthcare_assistant/screens/login_screen.dart';
+
 // Application entry point
 void main() {
   runApp(const HealthcareAssistantApp());
@@ -21,14 +25,63 @@ class HealthcareAssistantApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomeScreen(),
+      // AuthGate decides: logged in -> HomeScreen, logged out -> LoginScreen.
+      home: const AuthGate(),
     );
   }
 }
 
-// Home Screen Widget
+// Auth gate: checks saved session on startup and switches screens.
+class AuthGate extends StatefulWidget {
+  const AuthGate({super.key});
+
+  @override
+  State<AuthGate> createState() => _AuthGateState();
+}
+
+class _AuthGateState extends State<AuthGate> {
+  // Auth service for session lookup.
+  final AuthService _auth = AuthService();
+
+  // Cached login state (null = still loading).
+  bool? _loggedIn;
+
+  @override
+  void initState() {
+    super.initState();
+    // Check saved profile once when app opens.
+    _checkSession();
+  }
+
+  // Look for a saved logged-in user.
+  Future<void> _checkSession() async {
+    final user = await _auth.currentUser();
+    setState(() => _loggedIn = user != null);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Show spinner while reading saved session.
+    if (_loggedIn == null) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    // Logged in -> main app, else -> login.
+    if (_loggedIn!) {
+      return HomeScreen(onLoggedOut: () => setState(() => _loggedIn = false));
+    }
+    return LoginScreen(onLoggedIn: () => setState(() => _loggedIn = true));
+  }
+}
+
+// Home Screen Widget (main app after login)
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  // Called after logout so AuthGate can switch back to login.
+  final VoidCallback? onLoggedOut;
+
+  const HomeScreen({super.key, this.onLoggedOut});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -37,6 +90,12 @@ class HomeScreen extends StatefulWidget {
 // Home Screen State: handles Week 2 voice flow
 // Tap Button -> Speak -> Text Appears -> Advice Appears
 class _HomeScreenState extends State<HomeScreen> {
+  // Auth service for profile display + logout.
+  final AuthService _auth = AuthService();
+
+  // Cached profile text shown in the app bar subtitle.
+  String _profileLabel = '';
+
   // Voice recognition module (all mic logic lives in this service).
   final SpeechService _speechService = SpeechService();
 
@@ -58,6 +117,23 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // Prepare speech recognition early so tapping the mic is fast.
     _initSpeech();
+
+    // Load saved profile to show who is logged in.
+    _loadProfile();
+  }
+
+  // Load current user profile for the header + welcome text.
+  Future<void> _loadProfile() async {
+    final user = await _auth.currentUser();
+    if (mounted && user != null) {
+      setState(() => _profileLabel = '${user.name} (${user.email})');
+    }
+  }
+
+  // Log out and return to the login screen.
+  Future<void> _logout() async {
+    await _auth.logout();
+    widget.onLoggedOut?.call();
   }
 
   @override
@@ -160,10 +236,18 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-      // Top App Bar
+      // Top App Bar with saved profile + logout.
       appBar: AppBar(
         title: const Text("Healthcare Assistant"),
         centerTitle: true,
+        actions: [
+          // Logout button: clears session and shows login screen.
+          IconButton(
+            icon: const Icon(Icons.logout),
+            tooltip: 'Log out',
+            onPressed: _logout,
+          ),
+        ],
       ),
 
       // Screen Body (scrollable so keyboard does not overflow)
@@ -183,6 +267,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+
+              // Saved user profile line (from register / login).
+              if (_profileLabel.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Text(
+                    'Logged in as $_profileLabel',
+                    style: const TextStyle(color: Colors.grey),
+                  ),
+                ),
 
               const SizedBox(height: 30),
 

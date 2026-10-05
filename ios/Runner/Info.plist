@@ -66,5 +66,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<!-- Required for voice input: explains why the app needs the microphone -->
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need microphone access so you can speak your health question.</string>
+	<!-- Required for speech to text: explains why the app needs speech recognition -->
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>We need speech recognition to convert your voice into text for health advice.</string>
 </dict>
 </plist>

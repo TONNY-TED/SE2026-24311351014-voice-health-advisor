@@ -1,4 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Required for voice input: lets the app access the microphone -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- Required for speech recognition: lets the speech service reach the internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:label="healthcare_assistant"
         android:name="${applicationName}"

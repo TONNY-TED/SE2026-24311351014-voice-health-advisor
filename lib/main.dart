@@ -1,4 +1,5 @@
 // Import Flutter Material package
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 
 // Import Speech Recognition Module (Week 2: Voice Recognition)
@@ -6,6 +7,10 @@ import 'package:healthcare_assistant/services/speech_service.dart';
 
 // Import Authentication Module (register / login / saved profile)
 import 'package:healthcare_assistant/services/auth_service.dart';
+import 'package:healthcare_assistant/services/health_service.dart';
+import 'package:healthcare_assistant/services/knowledge_base_service.dart';
+import 'package:healthcare_assistant/services/local_db_service.dart';
+import 'package:healthcare_assistant/services/nlp_service.dart';
 import 'package:healthcare_assistant/screens/login_screen.dart';
 
 // Application entry point
@@ -22,8 +27,21 @@ class HealthcareAssistantApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Healthcare Assistant',
+      // Clean modern theme: blue primary, rounded inputs/cards.
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        useMaterial3: true,
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+        cardTheme: const CardThemeData(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+          ),
+        ),
       ),
       // AuthGate decides: logged in -> HomeScreen, logged out -> LoginScreen.
       home: const AuthGate(),
@@ -111,6 +129,12 @@ class _HomeScreenState extends State<HomeScreen> {
   // Controller for typed input (so users can type instead of speaking).
   final TextEditingController _textController = TextEditingController();
 
+  // Full 24-entry VoiceHealth base loaded from assets at startup.
+  List<KbEntry> _kbEntries = [];
+
+  // Last NLP parse shown under the advice heading (topic/condition/intent).
+  String _detectedLabel = '';
+
   @override
   void initState() {
     super.initState();
@@ -120,6 +144,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // Load saved profile to show who is logged in.
     _loadProfile();
+
+    // Load the 24-entry JSON knowledge base in the background.
+    _loadKnowledgeBase();
+  }
+
+  // Load VoiceHealth JSON once; advice falls back to 6 topics until ready.
+  Future<void> _loadKnowledgeBase() async {
+    try {
+      final entries = await KnowledgeBaseService.load();
+      if (mounted) setState(() => _kbEntries = entries);
+    } catch (_) {
+      // Keep fallback HealthService if asset fails (offline / missing).
+    }
   }
 
   // Load current user profile for the header + welcome text.
@@ -148,26 +185,68 @@ class _HomeScreenState extends State<HomeScreen> {
     await _speechService.initialize();
   }
 
-  // Update health advice from recognized text (Week 3/4 placeholder logic).
+  // Update health advice via NLP (Step 5) + recommendation engine.
+  // Query -> normalize -> topic/condition/intent -> entry -> guidance.
+  // Also stores the query in SQLite history when logged in (phone/desktop).
   void _updateAdvice(String text) {
-    // Convert to lower case so "Sleep" and "sleep" both match.
-    final lower = text.toLowerCase();
-
-    // Check for known keywords and show matching advice.
-    if (lower.contains("sleep")) {
-      healthAdvice =
-          "Maintain a regular sleep schedule and avoid caffeine before bedtime.";
-    } else if (lower.contains("water")) {
-      healthAdvice = "Drink at least 8 glasses of water daily.";
-    } else if (lower.contains("exercise")) {
-      healthAdvice = "Exercise for at least 30 minutes daily.";
-    } else if (lower.trim().isEmpty) {
-      // Handle empty input: user tapped but said nothing.
+    // Handle empty input first.
+    if (text.trim().isEmpty) {
+      _detectedLabel = '';
       healthAdvice = "I did not hear anything. Please tap and speak again.";
+      return;
+    }
+
+    // 1) NLP parse over the 24-entry base when loaded.
+    if (_kbEntries.isNotEmpty) {
+      final result = NlpService.parse(text, _kbEntries);
+      if (result.entry != null) {
+        // Show extracted topic / condition / intent for report + UML.
+        _detectedLabel =
+            'Detected: ${result.topic} (${result.condition}) - ${result.intent.name} (${(result.confidence * 100).round()}%)';
+
+        // Emergency gets a warning prefix so users act fast.
+        final body = result.entry!.formattedAdvice;
+        healthAdvice = result.isEmergency ? 'EMERGENCY:\n$body' : body;
+
+        // Save to local history (non-blocking, phone/desktop only).
+        _logHistory(text, result.topic, result.intent.name);
+        return;
+      }
+    }
+
+    // 2) Fallback to the 6-topic built-in base (works before JSON loads).
+    final topic = HealthService.findForQuery(text);
+
+    if (topic != null) {
+      // Show topic title + guidance.
+      _detectedLabel = 'Detected: ${topic.title} - wellness';
+      healthAdvice = '${topic.title}: ${topic.advice}';
+      _logHistory(text, topic.title, 'wellness');
     } else {
-      // Fallback when no keyword matches.
+      // Fallback lists supported examples.
+      _detectedLabel = '';
       healthAdvice =
-          "No recommendation found. Try mentioning sleep, water or exercise.";
+          "No match found. Try: sleep, water, exercise, diet, stress, malaria, cold, fever or emergency.";
+    }
+  }
+
+  // Save query to SQLite history for the logged-in user (Step: local data).
+  // Skipped on web (sqflite unavailable) and when logged out.
+  Future<void> _logHistory(String query, String topic, String intent) async {
+    // Chrome web has no SQLite.
+    if (kIsWeb) return;
+    try {
+      final user = await _auth.currentUser();
+      final email = user?.email ?? '';
+      if (email.isEmpty) return;
+      await LocalDbService.instance.addHistory(
+        email: email,
+        query: query,
+        topic: topic,
+        intent: intent,
+      );
+    } catch (_) {
+      // History must never break advice display.
     }
   }
 
@@ -343,6 +422,29 @@ class _HomeScreenState extends State<HomeScreen> {
                 label: const Text("Get Advice"),
               ),
 
+              const SizedBox(height: 12),
+
+              // Quick topic chips from the Knowledge Base (tap to query).
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    // One chip per topic; tapping runs it as a query.
+                    for (final topic in HealthService.topics)
+                      ActionChip(
+                        label: Text(topic.title),
+                        onPressed: () {
+                          // Fill the box + run the same advice engine.
+                          _textController.text = topic.title;
+                          _submitTypedText();
+                        },
+                      ),
+                  ],
+                ),
+              ),
+
               const SizedBox(height: 20),
 
             // Recognized Text Heading
@@ -384,9 +486,22 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
+            // NLP extraction result (topic / condition / intent + confidence).
+            if (_detectedLabel.isNotEmpty)
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    _detectedLabel,
+                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+                  ),
+                ),
+              ),
+
             const SizedBox(height: 10),
 
-            // Advice Output
+            // Advice Output (content + tips + see-doctor + source)
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(15),
@@ -395,6 +510,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(healthAdvice),
+            ),
+
+            // Safety disclaimer from the VoiceHealth base.
+            const SizedBox(height: 10),
+            Text(
+              KnowledgeBaseService.disclaimer,
+              style: const TextStyle(
+                fontSize: 12,
+                color: Colors.grey,
+                fontStyle: FontStyle.italic,
+              ),
             ),
           ],
         ),

@@ -1,0 +1,275 @@
+{
+  "meta": {
+    "project": "VoiceHealth",
+    "version": "0.1",
+    "entry_count": 24,
+    "disclaimer": "VoiceHealth provides general health and wellness information only. It does not diagnose medical conditions or prescribe medication, and always encourages users to consult a qualified healthcare professional.",
+    "note": "Starter set. Verify every entry against its listed source and rewrite in your own words before final submission."
+  },
+  "entries": [
+    {
+      "entry_id": "W001",
+      "category": "Wellness & lifestyle",
+      "topic": "Sleep",
+      "condition": "General wellness",
+      "keywords": ["sleep", "insomnia", "cannot sleep", "tired", "rest", "bedtime", "sleeping"],
+      "content": "Most adults need about 7 to 9 hours of sleep a night. A regular sleep routine and a calm, dark, quiet bedroom help you fall asleep and wake up refreshed.",
+      "tips": ["Go to bed and wake up at about the same time every day", "Avoid caffeine, heavy meals and phone screens close to bedtime", "Keep your bedroom cool, dark and quiet"],
+      "see_doctor_if": "You have trouble sleeping for several weeks, snore loudly with pauses in breathing, or feel so sleepy in the day that it affects your work or safety.",
+      "source": "NHS - How to get to sleep"
+    },
+    {
+      "entry_id": "W002",
+      "category": "Wellness & lifestyle",
+      "topic": "Physical activity",
+      "condition": "General wellness",
+      "keywords": ["exercise", "physical activity", "workout", "walking", "fitness", "active", "sport"],
+      "content": "Regular physical activity helps protect the heart, control weight, strengthen bones and improve mood. Adults are generally advised to aim for at least 150 minutes of moderate activity a week, such as brisk walking, and children about 60 minutes a day.",
+      "tips": ["Start slowly and build up gradually", "Break activity into short sessions, for example 10 minutes at a time", "Choose activities you enjoy so you keep doing them"],
+      "see_doctor_if": "You get chest pain, severe breathlessness or dizziness when active. Check with a health worker before starting if you are older, very inactive, or have a heart condition.",
+      "source": "WHO - Physical activity fact sheet"
+    },
+    {
+      "entry_id": "W003",
+      "category": "Wellness & lifestyle",
+      "topic": "Stress management",
+      "condition": "Stress and mental wellbeing",
+      "keywords": ["stress", "stressed", "anxiety", "worried", "mental health", "relax", "overwhelmed", "low mood"],
+      "content": "Everyone feels stress sometimes. Talking to someone you trust, slow breathing, regular activity and enough sleep can help you cope. Breaking big problems into small steps also makes them easier to handle.",
+      "tips": ["Talk to a friend, family member or faith leader you trust", "Try slow breathing: in for four counts, out for six", "Limit alcohol and keep to regular sleep and meals"],
+      "see_doctor_if": "Stress or low mood lasts more than two weeks or affects daily life. If you have thoughts of harming yourself, seek help right away from a health worker, a trusted person, or emergency services.",
+      "source": "WHO - Doing What Matters in Times of Stress"
+    },
+    {
+      "entry_id": "W004",
+      "category": "Wellness & lifestyle",
+      "topic": "Hydration",
+      "condition": "General wellness",
+      "keywords": ["water", "drink water", "hydration", "thirsty", "dehydrated", "fluids", "how much water"],
+      "content": "Your body needs fluids to work well. Many health services suggest around 6 to 8 glasses of fluid a day, and more in hot weather, during exercise or when you are ill. Clean water is the best choice, and pale yellow urine is a rough sign you are drinking enough.",
+      "tips": ["Sip water regularly through the day", "Choose water over sugary drinks", "Drink more in hot weather or when active"],
+      "see_doctor_if": "You have extreme thirst, very dark urine, dizziness or very little urine. If you have a kidney or heart condition, follow the fluid advice your health worker gave you.",
+      "source": "NHS - Water, drinks and hydration"
+    },
+    {
+      "entry_id": "D001",
+      "category": "Diet & nutrition",
+      "topic": "Healthy diet",
+      "condition": "General nutrition",
+      "keywords": ["healthy diet", "balanced diet", "what should i eat", "nutrition", "healthy eating", "food", "fruits", "vegetables"],
+      "content": "A healthy diet includes a variety of foods: vegetables, fruits, whole grains, beans, nuts and some animal-source foods. Aim for at least five portions of fruit and vegetables a day, and go easy on sugary drinks, fried food and processed snacks.",
+      "tips": ["Fill half your plate with vegetables and fruit", "Choose beans, groundnuts, fish or eggs as protein", "Cut back on sugary drinks and fried foods"],
+      "see_doctor_if": "You have unexplained weight loss or gain, constant tiredness, or you follow a very restricted diet. A health worker or dietitian can give personal advice.",
+      "source": "WHO - Healthy diet fact sheet"
+    },
+    {
+      "entry_id": "D002",
+      "category": "Diet & nutrition",
+      "topic": "Diet",
+      "condition": "High blood pressure",
+      "keywords": ["high blood pressure diet", "hypertension diet", "salt", "bp diet", "low salt", "what to eat for high blood pressure", "heart diet"],
+      "content": "Eating less salt can help keep blood pressure in a healthy range. WHO advises adults to have less than 5 grams of salt a day, about one teaspoon. Fruit, vegetables and fresh, unprocessed foods also support healthy blood pressure.",
+      "tips": ["Cook with less salt and fewer stock cubes", "Limit salty snacks, processed meats and salty sauces", "Eat more fruit, vegetables and beans"],
+      "see_doctor_if": "You get severe headache, chest pain, blurred vision or confusion. Seek urgent care. Also have your blood pressure checked regularly.",
+      "source": "WHO - Hypertension fact sheet; WHO - Salt reduction fact sheet"
+    },
+    {
+      "entry_id": "D003",
+      "category": "Diet & nutrition",
+      "topic": "Diet",
+      "condition": "Diabetes",
+      "keywords": ["diabetes diet", "sugar diet", "diabetic food", "what to eat with diabetes", "blood sugar food", "sugar"],
+      "content": "Healthy eating helps manage blood sugar. Choose whole grains, beans, vegetables and lean protein, eat at regular times, watch portion sizes, and limit sugary drinks and sweets.",
+      "tips": ["Replace sugary drinks with water", "Eat regular meals and avoid long gaps", "Ask a health worker or dietitian for a personal meal plan"],
+      "see_doctor_if": "You have very high thirst, frequent urination, unexplained weight loss, or your blood sugar swings a lot. Seek urgent care for confusion, fainting or vomiting.",
+      "source": "WHO - Diabetes fact sheet; NHS - Eating well with diabetes"
+    },
+    {
+      "entry_id": "D004",
+      "category": "Diet & nutrition",
+      "topic": "Child nutrition",
+      "condition": "Infant and young child feeding",
+      "keywords": ["baby food", "child nutrition", "breastfeeding", "infant feeding", "toddler food", "porridge", "feeding my baby", "weaning"],
+      "content": "WHO advises feeding babies only breast milk for the first 6 months. From 6 months, add safe, nutritious foods such as enriched porridge, mashed beans, eggs, fruit and vegetables, while continuing to breastfeed up to 2 years or beyond.",
+      "tips": ["Start solid foods at 6 months, not earlier", "Offer a variety of foods and increase amounts as the child grows", "Wash hands and use clean utensils when preparing baby food"],
+      "see_doctor_if": "Your child is not gaining weight, looks very thin, has swollen feet or face, seems very tired, or refuses to feed. Take them to a health facility for a growth check.",
+      "source": "WHO - Infant and young child feeding fact sheet"
+    },
+    {
+      "entry_id": "P001",
+      "category": "Preventive care",
+      "topic": "Hand hygiene",
+      "condition": "Infection prevention",
+      "keywords": ["handwashing", "wash hands", "hand hygiene", "soap", "germs", "clean hands", "prevent infection"],
+      "content": "Washing hands with soap and clean water is one of the simplest ways to prevent diarrhoea, colds, flu and many other infections. Scrub for at least 20 seconds, covering palms, backs of hands, between fingers and under nails.",
+      "tips": ["Wash before eating or preparing food", "Wash after using the toilet or changing a nappy", "Wash after coughing, sneezing or caring for someone who is sick"],
+      "see_doctor_if": "You develop diarrhoea, vomiting or fever despite good hygiene, or your skin stays cracked or sore from washing.",
+      "source": "WHO - Hand hygiene guidance; NHS - How to wash your hands"
+    },
+    {
+      "entry_id": "P002",
+      "category": "Preventive care",
+      "topic": "Malaria prevention",
+      "condition": "Malaria",
+      "keywords": ["prevent malaria", "malaria prevention", "mosquito net", "mosquito bite", "bed net", "avoid malaria", "mosquitoes"],
+      "content": "Malaria is spread by mosquito bites. Sleeping under an insecticide-treated net every night is one of the best protections. Removing standing water near your home reduces mosquito breeding.",
+      "tips": ["Sleep under a treated mosquito net every night", "Empty or cover containers holding stagnant water", "Wear long sleeves in the evening and use repellent if available"],
+      "see_doctor_if": "You have fever, chills or flu-like symptoms, even if you use prevention. Go for a malaria test promptly. Pregnant women should follow the malaria prevention advice from their antenatal clinic.",
+      "source": "WHO - Malaria fact sheet"
+    },
+    {
+      "entry_id": "P003",
+      "category": "Preventive care",
+      "topic": "Safe drinking water",
+      "condition": "Waterborne disease prevention",
+      "keywords": ["safe water", "clean water", "boil water", "water treatment", "cholera prevention", "drinking water", "dirty water"],
+      "content": "Unsafe water can spread diarrhoeal diseases such as cholera. Boil drinking water to a rolling boil, or treat it with chlorine as advised by local health services, and store it in a clean, covered container.",
+      "tips": ["Boil or treat water if you are unsure it is safe", "Keep stored water covered and use a clean cup to pour", "Wash hands before handling water and food"],
+      "see_doctor_if": "You have severe watery diarrhoea or repeated vomiting. Go to a health facility immediately and sip oral rehydration solution on the way.",
+      "source": "WHO - Drinking-water fact sheet; WHO - Cholera fact sheet"
+    },
+    {
+      "entry_id": "P004",
+      "category": "Preventive care",
+      "topic": "Vaccination",
+      "condition": "Immunization awareness",
+      "keywords": ["vaccine", "vaccination", "immunization", "immunisation", "child vaccines", "baby jabs", "tetanus", "measles", "polio"],
+      "content": "Vaccines protect against serious diseases such as measles, polio and tetanus. Children should follow the national immunization schedule at a health facility, and you should keep their child health card and bring it to every visit.",
+      "tips": ["Keep the child health card safe and bring it to each visit", "Ask your clinic which vaccines are due", "Ask about vaccines for adults and pregnant women too"],
+      "see_doctor_if": "You have missed vaccines, so visit your nearest health facility. Seek care if a child has a high fever, a seizure, severe swelling or constant crying after a vaccine.",
+      "source": "WHO - Immunization fact sheet; Ministry of Health immunization schedule"
+    },
+    {
+      "entry_id": "C001",
+      "category": "Common conditions (awareness only)",
+      "topic": "Malaria",
+      "condition": "Malaria",
+      "keywords": ["malaria", "malaria symptoms", "fever and chills", "i have fever", "mosquito fever", "shivering"],
+      "content": "Malaria is an illness spread by mosquitoes. Common signs are fever, chills, sweating, headache, muscle aches, tiredness and sometimes nausea or vomiting. A fever in a malaria area should be tested promptly, because early diagnosis and treatment are important.",
+      "tips": ["Get tested at a health facility the same day if you have a fever", "Take treatment only as prescribed by a health worker", "Rest and drink plenty of fluids"],
+      "see_doctor_if": "Seek urgent care for confusion, seizures, difficulty breathing, severe weakness or yellow eyes. Young children, pregnant women and people with weak immunity are at higher risk.",
+      "source": "WHO - Malaria fact sheet"
+    },
+    {
+      "entry_id": "C002",
+      "category": "Common conditions (awareness only)",
+      "topic": "Hypertension",
+      "condition": "High blood pressure",
+      "keywords": ["high blood pressure", "hypertension", "bp", "blood pressure", "what is hypertension", "heart pressure"],
+      "content": "High blood pressure means the force of blood on your artery walls is too high. It often has no symptoms, so the only way to know is to have it measured. Over time it raises the risk of heart disease, stroke and kidney problems.",
+      "tips": ["Have your blood pressure checked regularly", "Cut down on salt, avoid tobacco and limit alcohol", "Stay active and keep a healthy weight"],
+      "see_doctor_if": "Your readings stay high on repeated checks. Seek urgent care for severe headache, chest pain, vision changes or confusion.",
+      "source": "WHO - Hypertension fact sheet"
+    },
+    {
+      "entry_id": "C003",
+      "category": "Common conditions (awareness only)",
+      "topic": "Diabetes",
+      "condition": "Type 2 diabetes",
+      "keywords": ["diabetes", "high blood sugar", "diabetes symptoms", "always thirsty", "sugar disease", "frequent urination"],
+      "content": "In type 2 diabetes the body does not use insulin well, so blood sugar stays high. Signs can include more thirst, frequent urination, tiredness, blurred vision and slow-healing wounds, though some people have no symptoms. A healthy diet, activity and healthy weight lower the risk.",
+      "tips": ["Ask for a blood sugar test if you have symptoms or a family history", "Be active most days", "Choose water over sugary drinks"],
+      "see_doctor_if": "You have the symptoms above and have not been tested. Seek urgent care for vomiting, fruity-smelling breath, drowsiness or confusion.",
+      "source": "WHO - Diabetes fact sheet"
+    },
+    {
+      "entry_id": "C004",
+      "category": "Common conditions (awareness only)",
+      "topic": "Cold and flu",
+      "condition": "Common cold and influenza",
+      "keywords": ["cold", "flu", "cough", "sore throat", "runny nose", "sneezing", "influenza", "blocked nose"],
+      "content": "Colds and flu are caused by viruses, so antibiotics do not help. Typical signs are a runny or blocked nose, sore throat, cough, sneezing, aches and mild fever. Rest, fluids and good hygiene help, and most colds improve within one to two weeks.",
+      "tips": ["Rest and drink plenty of fluids", "Cover your mouth when coughing and wash hands often", "Stay home if you have a fever to avoid spreading it"],
+      "see_doctor_if": "You have difficulty breathing, chest pain, symptoms that worsen after a week, or a high fever lasting more than 3 days. Babies, older adults, pregnant women and people with long-term illness should be checked sooner.",
+      "source": "NHS - Common cold; WHO - Influenza fact sheet"
+    },
+    {
+      "entry_id": "C005",
+      "category": "Common conditions (awareness only)",
+      "topic": "Diarrhoea",
+      "condition": "Diarrhoea and dehydration",
+      "keywords": ["diarrhoea", "diarrhea", "loose stool", "watery stool", "running stomach", "vomiting", "dehydration", "stomach upset"],
+      "content": "Diarrhoea means three or more loose, watery stools in a day. The main danger is losing too much body water. Keep drinking safe fluids, keep eating, and continue breastfeeding babies.",
+      "tips": ["Sip oral rehydration solution or clean water often", "Wash hands and keep food and water clean", "Keep eating small, light meals"],
+      "see_doctor_if": "You see blood in the stool, cannot keep fluids down, or notice signs of dehydration such as very dry mouth, sunken eyes or very little urine. Take babies and young children to a health facility early.",
+      "source": "WHO - Diarrhoeal disease fact sheet"
+    },
+    {
+      "entry_id": "M001",
+      "category": "Medication awareness",
+      "topic": "Paracetamol",
+      "condition": "Mild pain and fever",
+      "keywords": ["paracetamol", "acetaminophen", "panadol", "headache tablet", "fever medicine", "pain relief", "painkiller"],
+      "content": "Paracetamol is commonly used to relieve mild to moderate pain and to bring down fever. Always follow the label or a health worker's advice, because taking more than recommended can seriously damage the liver. Check other cold and flu products, as many also contain paracetamol.",
+      "tips": ["Follow the instructions on the packet or from a pharmacist", "Do not combine it with other products containing paracetamol", "Keep medicines out of children's reach"],
+      "see_doctor_if": "Pain or fever lasts more than a few days, fever is very high, or you think you took too much. Seek urgent medical help for a suspected overdose.",
+      "source": "NHS - Paracetamol for adults; MedlinePlus - Acetaminophen"
+    },
+    {
+      "entry_id": "M002",
+      "category": "Medication awareness",
+      "topic": "Ibuprofen",
+      "condition": "Pain and inflammation",
+      "keywords": ["ibuprofen", "brufen", "anti-inflammatory", "nsaid", "painkiller", "joint pain tablet", "inflammation"],
+      "content": "Ibuprofen is a type of medicine called an NSAID, commonly used for pain, inflammation and fever. It can irritate the stomach, so it is usually best taken with or after food. It is not suitable for everyone.",
+      "tips": ["Take with or after food", "Ask a pharmacist first if you have asthma, kidney, heart or stomach problems", "Do not use if you are pregnant unless a health worker advises it"],
+      "see_doctor_if": "You get black stools, vomit blood, have stomach pain, swelling or breathing difficulty. Stop the medicine and get medical help.",
+      "source": "NHS - Ibuprofen for adults; MedlinePlus - Ibuprofen"
+    },
+    {
+      "entry_id": "M003",
+      "category": "Medication awareness",
+      "topic": "Antibiotics",
+      "condition": "Bacterial infections",
+      "keywords": ["antibiotics", "antibiotic", "amoxicillin", "infection tablets", "antibiotic resistance", "do i need antibiotics"],
+      "content": "Antibiotics treat bacterial infections, not viruses such as colds and flu. They should only be taken when prescribed by a health worker. Taking them wrongly, sharing them or keeping leftovers contributes to antibiotic resistance, which makes infections harder to treat.",
+      "tips": ["Take exactly as prescribed for the full time you were told", "Never share antibiotics or use leftovers", "Do not ask for antibiotics for a cold or flu"],
+      "see_doctor_if": "You develop a rash, swelling of the face or lips, or difficulty breathing. These may be signs of an allergic reaction and need emergency care.",
+      "source": "WHO - Antimicrobial resistance fact sheet"
+    },
+    {
+      "entry_id": "M004",
+      "category": "Medication awareness",
+      "topic": "Oral rehydration salts",
+      "condition": "Diarrhoea and vomiting",
+      "keywords": ["ors", "oral rehydration", "rehydration salts", "dehydration treatment", "diarrhoea medicine", "salt and sugar solution"],
+      "content": "Oral rehydration salts (ORS) replace the water and salts the body loses during diarrhoea or vomiting. Mix the packet with clean, safe water exactly as the instructions say, and give small, frequent sips.",
+      "tips": ["Use clean, safe water and follow the packet instructions", "Give small sips often, especially to children", "Keep feeding and breastfeeding"],
+      "see_doctor_if": "Diarrhoea lasts more than a few days, there is blood in the stool, the person cannot drink, or a baby or young child seems very unwell. Go to a health facility.",
+      "source": "WHO - Diarrhoeal disease fact sheet"
+    },
+    {
+      "entry_id": "S001",
+      "category": "When to see a doctor",
+      "topic": "Emergency warning signs",
+      "condition": "Urgent care",
+      "keywords": ["emergency", "urgent", "chest pain", "cannot breathe", "stroke", "seizure", "unconscious", "severe bleeding", "when to go to hospital"],
+      "content": "Some symptoms need emergency care straight away: chest pain or pressure, difficulty breathing, sudden weakness or numbness, face drooping or slurred speech, severe bleeding, a seizure, loss of consciousness, a severe allergic reaction, or thoughts of harming yourself.",
+      "tips": ["Go to the nearest health facility or call your local emergency number", "Do not drive yourself if you feel very unwell", "Tell someone nearby so they can help"],
+      "see_doctor_if": "Any of the signs above appear. Do not wait or rely on this app.",
+      "source": "WHO - Emergency care; NHS - When to call 999 or go to A&E"
+    },
+    {
+      "entry_id": "S002",
+      "category": "When to see a doctor",
+      "topic": "Fever warning signs",
+      "condition": "Fever",
+      "keywords": ["fever", "high temperature", "baby fever", "child fever", "fever for days", "hot body", "temperature"],
+      "content": "Fever is often the body's response to an infection, and many fevers settle on their own. Some fevers need prompt medical care, especially in babies, in malaria areas, or when other warning signs are present.",
+      "tips": ["Drink plenty of fluids and rest", "Dress lightly and keep the room comfortable", "In a malaria area, get tested the same day"],
+      "see_doctor_if": "A baby under 3 months has any fever, the fever lasts more than 3 days, or it comes with stiff neck, severe headache, rash, confusion, convulsions, difficulty breathing or constant vomiting.",
+      "source": "NHS - High temperature (fever) in adults; WHO - Malaria fact sheet"
+    },
+    {
+      "entry_id": "S003",
+      "category": "When to see a doctor",
+      "topic": "Symptoms not to ignore",
+      "condition": "Persistent symptoms",
+      "keywords": ["persistent cough", "weight loss", "blood in stool", "night sweats", "lump", "wound not healing", "long cough", "not getting better"],
+      "content": "Some symptoms should be checked even if you feel fairly well: a cough lasting 2 weeks or more, unexplained weight loss, night sweats, blood in urine, stool or cough, a lump that is growing, or a wound that does not heal.",
+      "tips": ["Note when the symptom started and whether it is changing", "Visit a health facility for an assessment", "Do not wait for it to become severe"],
+      "see_doctor_if": "You have any of these symptoms. Make an appointment soon, and go urgently if they come with breathing difficulty or heavy bleeding.",
+      "source": "WHO - Tuberculosis fact sheet; NHS - Health A to Z"
+    }
+  ]
+}

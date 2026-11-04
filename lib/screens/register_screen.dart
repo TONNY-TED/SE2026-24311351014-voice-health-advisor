@@ -1,192 +1,292 @@
-// Register Screen: polished card UI + validation for name/email/password.
+// Register Screen: create account, then return to login to sign in.
 
 import 'package:flutter/material.dart';
 
 import '../services/auth_service.dart';
 
 class RegisterScreen extends StatefulWidget {
-  // Called after successful registration (auto login).
-  final VoidCallback onRegistered;
-
-  const RegisterScreen({super.key, required this.onRegistered});
+  const RegisterScreen({super.key});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  // Auth logic lives in this service.
   final AuthService _auth = AuthService();
-
-  // Form key validates all fields together before register.
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  // Controllers for the three input boxes.
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
-  // Server-side error (e.g. duplicate email).
-  String? _error;
-
-  // Spinner while waiting for storage.
+  String? _status;
   bool _busy = false;
-
-  // Show/hide password toggle.
   bool _obscure = true;
 
   @override
   void dispose() {
-    // Free controllers when screen closes.
     _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
 
-  // Try to create the account: validate form first, then store user.
   Future<void> _doRegister() async {
-    // Stop if any field format is invalid.
     if (!_formKey.currentState!.validate()) return;
-
-    setState(() {
-      _busy = true;
-      _error = null;
-    });
-
-    // Ask the auth module to store the new user.
+    setState(() { _busy = true; _status = null; });
     final err = await _auth.register(
       name: _nameController.text,
       email: _emailController.text,
       password: _passwordController.text,
     );
-
     if (!mounted) return;
     setState(() => _busy = false);
-
-    // Show error, or go back + notify app on success.
     if (err != null) {
-      setState(() => _error = err);
+      setState(() => _status = err);
     } else {
+      // Confirm then return to login so the user re-enters credentials.
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Account created. Please log in.'),
+          backgroundColor: Colors.green,
+          duration: Duration(seconds: 3),
+        ),
+      );
       Navigator.pop(context);
-      widget.onRegistered();
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final primary = const Color(0xFF1E3A8A);
+
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
-      appBar: AppBar(title: const Text('Create account'), centerTitle: true),
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: Card(
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Icon(Icons.person_add_alt,
-                        size: 56, color: Colors.blue),
-                    const SizedBox(height: 8),
-                    const Text(
-                      'Create your profile',
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [primary, const Color(0xFF3B82F6), const Color(0xFF60A5FA)],
+          ),
+        ),
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Logo
+                  Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(28),
+                      boxShadow: [
+                        BoxShadow(
+                          color: primary.withOpacity(0.25),
+                          blurRadius: 24,
+                          offset: const Offset(0, 12),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 4),
-                    const Text('Saved on this device',
-                        style: TextStyle(color: Colors.grey)),
-                    const SizedBox(height: 20),
-
-                    // Name box: min 2 chars.
-                    TextFormField(
-                      controller: _nameController,
-                      textCapitalization: TextCapitalization.words,
-                      decoration: const InputDecoration(
-                        labelText: 'Full name',
-                        hintText: 'e.g. Ama Mensah',
-                        prefixIcon: Icon(Icons.person_outline),
-                        border: OutlineInputBorder(),
-                      ),
-                      validator: AuthService.validateName,
+                    child: const Icon(
+                      Icons.health_and_safety,
+                      size: 52,
+                      color: Color(0xFF1E3A8A),
                     ),
-                    const SizedBox(height: 12),
+                  ),
 
-                    // Email box: must match name@domain.tld.
-                    TextFormField(
-                      controller: _emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                        hintText: 'you@mail.com',
-                        prefixIcon: Icon(Icons.email_outlined),
-                        border: OutlineInputBorder(),
-                      ),
-                      validator: AuthService.validateEmail,
+                  const SizedBox(height: 24),
+
+                  // Welcome heading
+                  const Text(
+                    "Create Account",
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
-                    const SizedBox(height: 12),
+                  ),
+                  const SizedBox(height: 6),
+                  const Text(
+                    "Create your healthcare account",
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.white70,
+                    ),
+                  ),
 
-                    // Password box: min 6 chars + show/hide.
-                    TextFormField(
-                      controller: _passwordController,
-                      obscureText: _obscure,
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        hintText: 'Min 6 characters',
-                        prefixIcon: const Icon(Icons.lock_outline),
-                        border: const OutlineInputBorder(),
-                        suffixIcon: IconButton(
-                          icon: Icon(_obscure
-                              ? Icons.visibility_off
-                              : Icons.visibility),
-                          onPressed: () =>
-                              setState(() => _obscure = !_obscure),
+                  const SizedBox(height: 32),
+
+                  // Register form card
+                  Card(
+                    color: Colors.white,
+                    elevation: 6,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+
+                            // Name field
+                            TextFormField(
+                              controller: _nameController,
+                              textCapitalization: TextCapitalization.words,
+                              decoration: InputDecoration(
+                                hintText: 'Enter your full name',
+                                hintStyle: const TextStyle(color: Colors.grey),
+                                filled: true,
+                                fillColor: Colors.grey.shade100,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                  borderSide: BorderSide.none,
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                  borderSide: BorderSide(color: primary, width: 2),
+                                ),
+                              ),
+                              validator: AuthService.validateName,
+                            ),
+
+                            const SizedBox(height: 16),
+
+                            // Email field
+                            TextFormField(
+                              controller: _emailController,
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: InputDecoration(
+                                hintText: 'you@mail.com',
+                                hintStyle: const TextStyle(color: Colors.grey),
+                                filled: true,
+                                fillColor: Colors.grey.shade100,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                  borderSide: BorderSide.none,
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                  borderSide: BorderSide(color: primary, width: 2),
+                                ),
+                              ),
+                              validator: AuthService.validateEmail,
+                            ),
+
+                            const SizedBox(height: 16),
+
+                            // Password field
+                            TextFormField(
+                              controller: _passwordController,
+                              obscureText: _obscure,
+                              decoration: InputDecoration(
+                                hintText: 'New password (min 6 characters)',
+                                hintStyle: const TextStyle(color: Colors.grey),
+                                filled: true,
+                                fillColor: Colors.grey.shade100,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                  borderSide: BorderSide.none,
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                  borderSide: BorderSide(color: primary, width: 2),
+                                ),
+                                suffixIcon: IconButton(
+                                  icon: Icon(_obscure
+                                      ? Icons.visibility_off
+                                      : Icons.visibility),
+                                  onPressed: () =>
+                                      setState(() => _obscure = !_obscure),
+                                ),
+                              ),
+                              validator: AuthService.validatePassword,
+                            ),
+
+                            const SizedBox(height: 16),
+
+                            // Status message
+                            if (_status != null)
+                              Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  color: (_status!.startsWith('Save') ||
+                                          _status!.startsWith('Password'))
+                                      ? Colors.green.shade50
+                                      : Colors.red.shade50,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Text(
+                                  _status!,
+                                  style: const TextStyle(
+                                    color: Color(0xFF1E3A8A),
+                                  ),
+                                ),
+                              ),
+                            if (_status != null) const SizedBox(height: 16),
+
+                            // Register button
+                            SizedBox(
+                              width: double.infinity,
+                              height: 56,
+                              child: FilledButton.icon(
+                                onPressed: _busy ? null : _doRegister,
+                                icon: _busy
+                                    ? const SizedBox(
+                                        height: 20,
+                                        width: 20,
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: 2,
+                                          color: Colors.white,
+                                        ),
+                                      )
+                                    : const Icon(Icons.check),
+                                label: Text(
+                                  _busy ? 'Creating...' : 'Register',
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                style: FilledButton.styleFrom(
+                                  backgroundColor: primary,
+                                  foregroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(height: 16),
+
+                            // Login link
+                            SizedBox(
+                              width: double.infinity,
+                              child: OutlinedButton.icon(
+                                onPressed: () => Navigator.pop(context),
+                                icon: const Icon(Icons.login),
+                                label: const Text('Already have an account? Log in'),
+                                style: OutlinedButton.styleFrom(
+                                  foregroundColor: Colors.blue,
+                                  side: const BorderSide(color: Colors.blue),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      validator: AuthService.validatePassword,
-                      onFieldSubmitted: (_) => _doRegister(),
                     ),
-                    const SizedBox(height: 12),
-
-                    if (_error != null)
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Colors.red.shade50,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text(_error!,
-                            style: const TextStyle(color: Colors.red)),
-                      ),
-                    if (_error != null) const SizedBox(height: 8),
-
-                    SizedBox(
-                      width: double.infinity,
-                      child: FilledButton.icon(
-                        onPressed: _busy ? null : _doRegister,
-                        icon: _busy
-                            ? const SizedBox(
-                                height: 18,
-                                width: 18,
-                                child: CircularProgressIndicator(
-                                    strokeWidth: 2, color: Colors.white),
-                              )
-                            : const Icon(Icons.check),
-                        label:
-                            Text(_busy ? 'Creating...' : 'Register'),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -195,3 +295,4 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 }
+

@@ -7,27 +7,53 @@ import 'package:healthcare_assistant/services/speech_service.dart';
 
 // Import Authentication Module (register / login / saved profile)
 import 'package:healthcare_assistant/services/auth_service.dart';
+import 'package:healthcare_assistant/services/app_settings_service.dart';
 import 'package:healthcare_assistant/services/health_service.dart';
 import 'package:healthcare_assistant/services/knowledge_base_service.dart';
 import 'package:healthcare_assistant/services/local_db_service.dart';
 import 'package:healthcare_assistant/services/nlp_service.dart';
 import 'package:healthcare_assistant/screens/login_screen.dart';
+import 'package:healthcare_assistant/screens/sources_screen.dart';
+import 'package:healthcare_assistant/screens/history_screen.dart';
+import 'package:healthcare_assistant/screens/profile_screen.dart';
+import 'package:healthcare_assistant/widgets/main_shell.dart';
 
 // Application entry point
 void main() {
   runApp(const HealthcareAssistantApp());
 }
 
-// Main Application Widget
-class HealthcareAssistantApp extends StatelessWidget {
+// Main Application Widget (loads persisted theme + font scale first).
+class HealthcareAssistantApp extends StatefulWidget {
   const HealthcareAssistantApp({super.key});
 
   @override
+  State<HealthcareAssistantApp> createState() => _HealthcareAssistantAppState();
+}
+
+class _HealthcareAssistantAppState extends State<HealthcareAssistantApp> {
+  final AppSettingsService _settings = AppSettingsService();
+  bool _ready = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _settings.load().then((_) {
+      if (mounted) setState(() => _ready = true);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (!_ready) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Healthcare Assistant',
-      // Clean modern theme: blue primary, rounded inputs/cards.
+      title: 'VoiceHealth',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
@@ -43,35 +69,31 @@ class HealthcareAssistantApp extends StatelessWidget {
           ),
         ),
       ),
-      // AuthGate decides: logged in -> HomeScreen, logged out -> LoginScreen.
-      home: const AuthGate(),
+      home: AuthGate(settings: _settings),
     );
   }
 }
 
 // Auth gate: checks saved session on startup and switches screens.
 class AuthGate extends StatefulWidget {
-  const AuthGate({super.key});
+  final AppSettingsService settings;
+
+  const AuthGate({super.key, required this.settings});
 
   @override
   State<AuthGate> createState() => _AuthGateState();
 }
 
 class _AuthGateState extends State<AuthGate> {
-  // Auth service for session lookup.
   final AuthService _auth = AuthService();
-
-  // Cached login state (null = still loading).
   bool? _loggedIn;
 
   @override
   void initState() {
     super.initState();
-    // Check saved profile once when app opens.
     _checkSession();
   }
 
-  // Look for a saved logged-in user.
   Future<void> _checkSession() async {
     final user = await _auth.currentUser();
     setState(() => _loggedIn = user != null);
@@ -79,161 +101,118 @@ class _AuthGateState extends State<AuthGate> {
 
   @override
   Widget build(BuildContext context) {
-    // Show spinner while reading saved session.
     if (_loggedIn == null) {
       return const Scaffold(
         body: Center(child: CircularProgressIndicator()),
       );
     }
 
-    // Logged in -> main app, else -> login.
     if (_loggedIn!) {
-      return HomeScreen(onLoggedOut: () => setState(() => _loggedIn = false));
+      return MainShell(
+        settings: AppSettingsService(),
+        onLoggedOut: () => setState(() => _loggedIn = false),
+      );
     }
     return LoginScreen(onLoggedIn: () => setState(() => _loggedIn = true));
   }
 }
 
-// Home Screen Widget (main app after login)
+// Home Screen Widget: Voice Query tab (main health assistant).
 class HomeScreen extends StatefulWidget {
-  // Called after logout so AuthGate can switch back to login.
-  final VoidCallback? onLoggedOut;
-
-  const HomeScreen({super.key, this.onLoggedOut});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 // Home Screen State: handles Week 2 voice flow
-// Tap Button -> Speak -> Text Appears -> Advice Appears
 class _HomeScreenState extends State<HomeScreen> {
-  // Auth service for profile display + logout.
   final AuthService _auth = AuthService();
-
-  // Cached profile text shown in the app bar subtitle.
-  String _profileLabel = '';
-
-  // Voice recognition module (all mic logic lives in this service).
   final SpeechService _speechService = SpeechService();
 
-  // Indicates whether app is currently listening.
   bool isListening = false;
-
-  // Stores recognized speech to show on screen.
   String recognizedText = "No voice input yet";
-
-  // Stores health advice to show on screen.
   String healthAdvice = "Your health advice will appear here";
-
-  // Controller for typed input (so users can type instead of speaking).
   final TextEditingController _textController = TextEditingController();
 
-  // Full 24-entry VoiceHealth base loaded from assets at startup.
   List<KbEntry> _kbEntries = [];
-
-  // Last NLP parse shown under the advice heading (topic/condition/intent).
   String _detectedLabel = '';
+  String _userName = '';
+  String _userEmail = '';
 
   @override
   void initState() {
     super.initState();
-
-    // Prepare speech recognition early so tapping the mic is fast.
     _initSpeech();
-
-    // Load saved profile to show who is logged in.
     _loadProfile();
-
-    // Load the 24-entry JSON knowledge base in the background.
     _loadKnowledgeBase();
   }
 
-  // Load VoiceHealth JSON once; advice falls back to 6 topics until ready.
   Future<void> _loadKnowledgeBase() async {
     try {
       final entries = await KnowledgeBaseService.load();
       if (mounted) setState(() => _kbEntries = entries);
-    } catch (_) {
-      // Keep fallback HealthService if asset fails (offline / missing).
-    }
+    } catch (_) {}
   }
 
-  // Load current user profile for the header + welcome text.
   Future<void> _loadProfile() async {
     final user = await _auth.currentUser();
     if (mounted && user != null) {
-      setState(() => _profileLabel = '${user.name} (${user.email})');
+      setState(() {
+        _userName = user.name;
+        _userEmail = user.email;
+      });
     }
   }
 
-  // Log out and return to the login screen.
   Future<void> _logout() async {
     await _auth.logout();
-    widget.onLoggedOut?.call();
   }
 
   @override
   void dispose() {
-    // Free the text controller when the screen is closed.
     _textController.dispose();
     super.dispose();
   }
 
-  // Initialize the speech engine once when the screen loads.
   Future<void> _initSpeech() async {
     await _speechService.initialize();
   }
 
-  // Update health advice via NLP (Step 5) + recommendation engine.
-  // Query -> normalize -> topic/condition/intent -> entry -> guidance.
-  // Also stores the query in SQLite history when logged in (phone/desktop).
   void _updateAdvice(String text) {
-    // Handle empty input first.
     if (text.trim().isEmpty) {
       _detectedLabel = '';
       healthAdvice = "I did not hear anything. Please tap and speak again.";
       return;
     }
 
-    // 1) NLP parse over the 24-entry base when loaded.
     if (_kbEntries.isNotEmpty) {
       final result = NlpService.parse(text, _kbEntries);
       if (result.entry != null) {
-        // Show extracted topic / condition / intent for report + UML.
         _detectedLabel =
             'Detected: ${result.topic} (${result.condition}) - ${result.intent.name} (${(result.confidence * 100).round()}%)';
 
-        // Emergency gets a warning prefix so users act fast.
         final body = result.entry!.formattedAdvice;
         healthAdvice = result.isEmergency ? 'EMERGENCY:\n$body' : body;
-
-        // Save to local history (non-blocking, phone/desktop only).
         _logHistory(text, result.topic, result.intent.name);
         return;
       }
     }
 
-    // 2) Fallback to the 6-topic built-in base (works before JSON loads).
     final topic = HealthService.findForQuery(text);
 
     if (topic != null) {
-      // Show topic title + guidance.
       _detectedLabel = 'Detected: ${topic.title} - wellness';
       healthAdvice = '${topic.title}: ${topic.advice}';
       _logHistory(text, topic.title, 'wellness');
     } else {
-      // Fallback lists supported examples.
       _detectedLabel = '';
       healthAdvice =
           "No match found. Try: sleep, water, exercise, diet, stress, malaria, cold, fever or emergency.";
     }
   }
 
-  // Save query to SQLite history for the logged-in user (Step: local data).
-  // Skipped on web (sqflite unavailable) and when logged out.
   Future<void> _logHistory(String query, String topic, String intent) async {
-    // Chrome web has no SQLite.
     if (kIsWeb) return;
     try {
       final user = await _auth.currentUser();
@@ -245,33 +224,20 @@ class _HomeScreenState extends State<HomeScreen> {
         topic: topic,
         intent: intent,
       );
-    } catch (_) {
-      // History must never break advice display.
-    }
+    } catch (_) {}
   }
 
-  // Handle typed input: user writes instead of speaking.
   void _submitTypedText() {
-    // Read what the user typed.
     final typed = _textController.text;
-
     setState(() {
-      // Show typed text in the same recognized-text box as voice.
       recognizedText = typed.isEmpty ? "No voice input yet" : typed;
-
-      // Reuse the same advice engine as voice input.
       _updateAdvice(typed);
     });
   }
 
-  // Start/Stop Listening Function for the mic button.
   void listen() async {
-    // If microphone is not listening, start it.
     if (!isListening) {
-      // Ask for permission and check if speech is supported.
       bool available = await _speechService.initialize();
-
-      // Device blocked speech recognition (no mic, no permission, no network).
       if (!available) {
         setState(() {
           recognizedText = "Microphone not available";
@@ -280,47 +246,52 @@ class _HomeScreenState extends State<HomeScreen> {
         });
         return;
       }
-
-      // Show listening state in the UI.
-      setState(() {
-        isListening = true;
-      });
-
-      // Start the microphone and update text live as the user speaks.
+      setState(() => isListening = true);
       await _speechService.startListening(
         onText: (text) {
           setState(() {
-            // Store recognized speech, show placeholder if empty.
             recognizedText =
                 text.isEmpty ? "Listening... please speak" : text;
-
-            // Generate health advice from the new text.
             _updateAdvice(text);
           });
         },
       );
-    }
-
-    // If already listening, stop the microphone.
-    else {
+    } else {
       await _speechService.stop();
-
-      setState(() {
-        isListening = false;
-      });
+      setState(() => isListening = false);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    final primary = Theme.of(context).colorScheme.primary;
 
-      // Top App Bar with saved profile + logout.
+    return Scaffold(
       appBar: AppBar(
-        title: const Text("Healthcare Assistant"),
+        title: const Text("VoiceHealth"),
         centerTitle: true,
+        elevation: 0,
         actions: [
-          // Logout button: clears session and shows login screen.
+          IconButton(
+            icon: const Icon(Icons.history),
+            tooltip: 'History',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const HistoryScreen()),
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.library_books_outlined),
+            tooltip: 'Knowledge sources',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const SourcesScreen()),
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.logout),
             tooltip: 'Log out',
@@ -329,125 +300,309 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
 
-      // Screen Body (scrollable so keyboard does not overflow)
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(16),
 
           child: Column(
             children: [
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 8),
 
               const Text(
-                "AI-Powered Healthcare Assistant",
+                "VoiceHealth Assistant",
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 22,
                   fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+                textAlign: TextAlign.center,
+              ),
+
+              const SizedBox(height: 6),
+
+              const Text(
+                "Ask health questions by voice or text and get guidance "
+                "from the clinical knowledge base.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.grey,
+                  height: 1.4,
                 ),
               ),
 
-              // Saved user profile line (from register / login).
-              if (_profileLabel.isNotEmpty)
-                Padding(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: Text(
-                    'Logged in as $_profileLabel',
-                    style: const TextStyle(color: Colors.grey),
+              const SizedBox(height: 24),
+
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [primary, primary.withOpacity(0.85)],
                   ),
+                  borderRadius: BorderRadius.circular(16),
                 ),
-
-              const SizedBox(height: 30),
-
-              // Voice Button
-              ElevatedButton.icon(
-
-                onPressed: listen,
-
-                icon: Icon(
-                  isListening
-                      ? Icons.mic
-                      : Icons.mic_none,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: const Icon(Icons.health_and_safety,
+                              color: Colors.white, size: 32),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "VoiceHealth",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                "Ask health questions by voice or text and get "
+                                "guidance from the clinical knowledge base.",
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
+              ),
 
-                label: Text(
-                  isListening
-                      ? "Listening..."
-                      : "Tap To Speak",
+              const SizedBox(height: 24),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "ACCOUNT",
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            _userName.isNotEmpty ? _userName : "James Gosling",
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            _userEmail.isNotEmpty
+                                ? _userEmail
+                                : "johndoe@email.com",
+                            style: const TextStyle(
+                              fontSize: 13,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    OutlinedButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => ProfileScreen(
+                              settings: AppSettingsService(),
+                            ),
+                          ),
+                        );
+                      },
+                      icon: const Icon(Icons.person_outline, size: 18),
+                      label: const Text("Update Profile"),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: primary,
+                        side: BorderSide(color: primary),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 12,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
+              ),
 
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 30,
-                    vertical: 15,
+              const SizedBox(height: 24),
+
+              Card(
+                elevation: 0,
+                color: Colors.grey.shade50,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      InkWell(
+                        onTap: listen,
+                        borderRadius: BorderRadius.circular(40),
+                        child: CircleAvatar(
+                          radius: 36,
+                          backgroundColor: Colors.blue.shade50,
+                          child: Icon(
+                            isListening ? Icons.mic : Icons.mic_none,
+                            size: 36,
+                            color: Colors.blue.shade700,
+                          ),
+                        ),
+                      ),
+
+                      const SizedBox(height: 10),
+
+                      const Text(
+                        "Tap microphone to speak",
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                        ),
+                      ),
+
+                      const SizedBox(height: 16),
+
+                      TextField(
+                        controller: _textController,
+                        decoration: InputDecoration(
+                          hintText: "e.g. How much water should I drink?",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: Colors.grey.shade300),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: Colors.grey.shade300),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: primary, width: 2),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 14,
+                          ),
+                        ),
+                        onSubmitted: (_) => _submitTypedText(),
+                      ),
+
+                      const SizedBox(height: 16),
+
+                      SizedBox(
+                        width: double.infinity,
+                        height: 52,
+                        child: FilledButton.icon(
+                          onPressed: _submitTypedText,
+                          icon: const Icon(Icons.analytics_outlined,
+                              size: 20),
+                          label: const Text("Analyze & Recommend",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              )),
+                          style: FilledButton.styleFrom(
+                            backgroundColor: Colors.blue.shade700,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 24),
 
-              // Typed input label
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Or type your question:",
+                  "Try asking:",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
+                    color: Colors.black87,
                   ),
                 ),
-              ),
-
-              const SizedBox(height: 10),
-
-              // Text box for typing (alternative to speaking)
-              TextField(
-                controller: _textController,
-                decoration: InputDecoration(
-                  hintText: "e.g. How much water should I drink?",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                // Pressing enter on keyboard submits too.
-                onSubmitted: (_) => _submitTypedText(),
-              ),
-
-              const SizedBox(height: 10),
-
-              // Submit button for typed input
-              ElevatedButton.icon(
-                onPressed: _submitTypedText,
-                icon: const Icon(Icons.send),
-                label: const Text("Get Advice"),
               ),
 
               const SizedBox(height: 12),
 
-              // Quick topic chips from the Knowledge Base (tap to query).
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
                   children: [
-                    // One chip per topic; tapping runs it as a query.
-                    for (final topic in HealthService.topics)
-                      ActionChip(
-                        label: Text(topic.title),
-                        onPressed: () {
-                          // Fill the box + run the same advice engine.
-                          _textController.text = topic.title;
-                          _submitTypedText();
-                        },
+                    for (final sample in _samples)
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: OutlinedButton(
+                          onPressed: () {
+                            _textController.text = sample;
+                            _submitTypedText();
+                          },
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: Colors.black87,
+                            side: BorderSide(color: Colors.grey.shade300),
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 14,
+                              vertical: 10,
+                            ),
+                          ),
+                          child: Text(
+                            sample,
+                            style: const TextStyle(fontSize: 13),
+                          ),
+                        ),
                       ),
                   ],
                 ),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 24),
 
-            // Recognized Text Heading
             const Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -455,26 +610,29 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
+                  color: Colors.black87,
                 ),
               ),
             ),
 
             const SizedBox(height: 10),
 
-            // Recognized Voice Output
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
+                border: Border.all(color: Colors.grey.shade300),
                 borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
               ),
-              child: Text(recognizedText),
+              child: Text(
+                recognizedText,
+                style: const TextStyle(fontSize: 15, color: Colors.black87),
+              ),
             ),
 
             const SizedBox(height: 25),
 
-            // Advice Heading
             const Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -482,11 +640,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
+                  color: Colors.black87,
                 ),
               ),
             ),
 
-            // NLP extraction result (topic / condition / intent + confidence).
             if (_detectedLabel.isNotEmpty)
               Align(
                 alignment: Alignment.centerLeft,
@@ -501,7 +659,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const SizedBox(height: 10),
 
-            // Advice Output (content + tips + see-doctor + source)
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(15),
@@ -509,10 +666,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.blue.shade50,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text(healthAdvice),
+              child: Text(
+                healthAdvice,
+                style: const TextStyle(
+                  fontSize: 15,
+                  color: Colors.black87,
+                  height: 1.4,
+                ),
+              ),
             ),
 
-            // Safety disclaimer from the VoiceHealth base.
             const SizedBox(height: 10),
             Text(
               KnowledgeBaseService.disclaimer,
@@ -520,12 +683,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontSize: 12,
                 color: Colors.grey,
                 fontStyle: FontStyle.italic,
+                height: 1.4,
               ),
+              textAlign: TextAlign.center,
             ),
+
+            const SizedBox(height: 20),
           ],
         ),
         ),
       ),
     );
   }
+
+  // ---- Sample health inquiries
+  static const List<String> _samples = [
+    'How much water should I drink?',
+    'I cannot sleep at night',
+    'Fever and chills',
+    'Chest pain',
+    'What should I eat?',
+    'How do I wash my hands?',
+  ];
 }

@@ -118,4 +118,14 @@ class LocalDbService {
       limit: limit,
     );
   }
+
+  // Clear all history rows for one user (history screen button).
+  Future<void> clearHistory(String email) async {
+    final db = await database;
+    await db.delete(
+      'history',
+      where: 'email = ?',
+      whereArgs: [email.trim().toLowerCase()],
+    );
+  }
 }

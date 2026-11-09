@@ -13,11 +13,7 @@ class ProfileScreen extends StatefulWidget {
   final AppSettingsService settings;
   final VoidCallback? onLoggedOut;
 
-  const ProfileScreen({
-    super.key,
-    required this.settings,
-    this.onLoggedOut,
-  });
+  const ProfileScreen({super.key, required this.settings, this.onLoggedOut});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -73,7 +69,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       return;
     }
 
-    setState(() { _busy = true; _status = null; });
+    setState(() {
+      _busy = true;
+      _status = null;
+    });
 
     final user = _user;
     if (user != null && user.email.isNotEmpty) {
@@ -149,7 +148,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     final user = _user;
     if (user == null || user.email.isEmpty) return;
-    setState(() { _busy = true; _status = null; });
+    setState(() {
+      _busy = true;
+      _status = null;
+    });
     try {
       await _updateUserPassword(user.email, '');
       await _auth.logout();
@@ -172,7 +174,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _updateUserRecord(
-      String oldEmail, String newName, String newEmail) async {
+    String oldEmail,
+    String newName,
+    String newEmail,
+  ) async {
     final db = await LocalDbService.instance.database;
     await db.update(
       'users',
@@ -203,17 +208,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         elevation: 0,
       ),
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              primary,
-              primary.withValues(alpha: 0.7),
-              const Color(0xFF60A5FA),
-            ],
-          ),
-        ),
+        decoration: BoxDecoration(color: Color.fromRGBO(0, 55, 175, 1)),
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
@@ -257,10 +252,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(height: 6),
                   const Text(
                     "Edit your account details",
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.white70,
-                    ),
+                    style: TextStyle(fontSize: 15, color: Colors.white70),
                   ),
 
                   const SizedBox(height: 32),
@@ -277,12 +269,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-
                           // Avatar placeholder
                           const CircleAvatar(
                             radius: 34,
                             backgroundColor: Color(0xFF1E3A8A),
-                            child: Icon(Icons.person, size: 34, color: Colors.white),
+                            child: Icon(
+                              Icons.person,
+                              size: 34,
+                              color: Colors.white,
+                            ),
                           ),
                           const SizedBox(height: 16),
 
@@ -301,7 +296,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(14),
-                                borderSide: BorderSide(color: primary, width: 2),
+                                borderSide: BorderSide(
+                                  color: primary,
+                                  width: 2,
+                                ),
                               ),
                             ),
                           ),
@@ -323,7 +321,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(14),
-                                borderSide: BorderSide(color: primary, width: 2),
+                                borderSide: BorderSide(
+                                  color: primary,
+                                  width: 2,
+                                ),
                               ),
                             ),
                           ),
@@ -343,9 +344,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               hintText: 'New password (min 6)',
                               border: const OutlineInputBorder(),
                               suffixIcon: IconButton(
-                                icon: Icon(_obscureNew
-                                    ? Icons.visibility_off
-                                    : Icons.visibility),
+                                icon: Icon(
+                                  _obscureNew
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                ),
                                 onPressed: () =>
                                     setState(() => _obscureNew = !_obscureNew),
                               ),
@@ -359,11 +362,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               hintText: 'Confirm new password',
                               border: const OutlineInputBorder(),
                               suffixIcon: IconButton(
-                                icon: Icon(_obscureConfirm
-                                    ? Icons.visibility_off
-                                    : Icons.visibility),
-                                onPressed: () =>
-                                    setState(() => _obscureConfirm = !_obscureConfirm),
+                                icon: Icon(
+                                  _obscureConfirm
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                ),
+                                onPressed: () => setState(
+                                  () => _obscureConfirm = !_obscureConfirm,
+                                ),
                               ),
                             ),
                           ),
@@ -376,7 +382,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               width: double.infinity,
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: (_status!.startsWith('Save') ||
+                                color:
+                                    (_status!.startsWith('Save') ||
                                         _status!.startsWith('Password'))
                                     ? Colors.green.shade50
                                     : Colors.red.shade50,
@@ -431,8 +438,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             width: double.infinity,
                             child: OutlinedButton.icon(
                               onPressed: _busy ? null : _deletePassword,
-                              icon: const Icon(Icons.delete_outline,
-                                  color: Colors.red),
+                              icon: const Icon(
+                                Icons.delete_outline,
+                                color: Colors.red,
+                              ),
                               label: const Text(
                                 'Delete saved password',
                                 style: TextStyle(color: Colors.red),
@@ -457,8 +466,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) =>
-                                        SettingsScreen(settings: widget.settings),
+                                    builder: (_) => SettingsScreen(
+                                      settings: widget.settings,
+                                    ),
                                   ),
                                 );
                               },
@@ -506,11 +516,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             width: double.infinity,
                             child: FilledButton.icon(
-                              onPressed: _busy ? null : () async {
-                                await _auth.logout();
-                                if (!mounted) return;
-                                widget.onLoggedOut?.call();
-                              },
+                              onPressed: _busy
+                                  ? null
+                                  : () async {
+                                      await _auth.logout();
+                                      if (!mounted) return;
+                                      widget.onLoggedOut?.call();
+                                    },
                               icon: const Icon(Icons.logout),
                               label: const Text('Log Out'),
                               style: FilledButton.styleFrom(

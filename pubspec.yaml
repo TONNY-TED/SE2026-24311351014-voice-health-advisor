@@ -42,6 +42,7 @@ dependencies:
   path: ^1.9.1
   # Open email / WhatsApp apps with prefilled appointment requests.
   url_launcher: ^6.3.1
+  flutter_tts: ^4.2.5
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +70,12 @@ flutter:
   assets:
     - assets/knowledge_base.json
     - assets/health_sources.json
+    # Login background image (place bg.png / bg.jpg / bg.jpeg here).
+    - assets/bg.png
+    # Intro slider images (place intro1.png, intro2.png, intro3.png here).
+    - assets/intro/intro1.png
+    - assets/intro/intro2.png
+    - assets/intro/intro3.png
     # Doctor profile images (flutter_gallery/dr.vitumbiko.jpg).
     - flutter_gallery/
 

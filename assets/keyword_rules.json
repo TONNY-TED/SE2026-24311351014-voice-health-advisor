@@ -1,0 +1,531 @@
+{
+  "version": 1,
+  "note": "A rule matches when every keyword group has at least one term in the user's text. Terms starting with '=' or 3 letters or fewer match whole words only; other terms match word prefixes. Synonyms add canonical words to the text before matching.",
+  "synonyms": {
+    "pain": [
+      "hurt",
+      "hurts",
+      "hurting",
+      "ache",
+      "aching",
+      "aches",
+      "sore",
+      "painful",
+      "soreness",
+      "tender"
+    ],
+    "leg": [
+      "legs",
+      "lower limb"
+    ],
+    "arm": [
+      "arms",
+      "upper limb"
+    ],
+    "stomach": [
+      "tummy",
+      "belly",
+      "abdomen",
+      "abdominal"
+    ],
+    "torn": [
+      "teared",
+      "tear",
+      "tore",
+      "ruptured",
+      "rupture",
+      "snapped"
+    ],
+    "broken": [
+      "fractured",
+      "fracture",
+      "cracked",
+      "broke"
+    ],
+    "swollen": [
+      "swelling",
+      "swell",
+      "swelled",
+      "puffy"
+    ],
+    "cannot walk": [
+      "can not walk",
+      "unable to walk",
+      "limping",
+      "limp"
+    ],
+    "dizzy": [
+      "giddy",
+      "light headed",
+      "lightheaded",
+      "dizziness"
+    ],
+    "fever": [
+      "high temperature",
+      "hot body",
+      "feverish"
+    ],
+    "bleeding": [
+      "bleed",
+      "bleeds",
+      "bled"
+    ],
+    "vomiting": [
+      "vomit",
+      "vomited",
+      "throwing up",
+      "threw up"
+    ],
+    "diarrhoea": [
+      "diarrhea",
+      "loose stool",
+      "loose stools",
+      "running stomach"
+    ],
+    "numb": [
+      "numbness",
+      "pins and needles",
+      "tingling"
+    ],
+    "tongue": [
+      "taunge",
+      "tounge"
+    ],
+    "elbow": [
+      "ebow",
+      "elbows"
+    ],
+    "shoulder": [
+      "shoulders"
+    ],
+    "knee": [
+      "knees"
+    ],
+    "tooth": [
+      "teeth"
+    ],
+    "child": [
+      "kid",
+      "kids",
+      "toddler",
+      "children"
+    ],
+    "baby": [
+      "infant",
+      "newborn"
+    ],
+    "pregnant": [
+      "pregnancy",
+      "expecting"
+    ],
+    "sad": [
+      "depressed",
+      "hopeless",
+      "low mood"
+    ],
+    "worry": [
+      "worried",
+      "anxious",
+      "anxiety",
+      "panic"
+    ],
+    "hives": [
+      "urticaria",
+      "wheals",
+      "allergic rash",
+      "itchy bumps"
+    ],
+    "heart attack": [
+      "myocardial infarction",
+      "cardiac event"
+    ],
+    "stroke": [
+      "cerebrovascular accident",
+      "brain attack"
+    ],
+    "asthma": [
+      "bronchial asthma",
+      "reactive airways"
+    ],
+    "diabetes": [
+      "sugar disease",
+      "hyperglycemia"
+    ],
+    "anxiety": [
+      "anxiety disorders",
+      "generalized anxiety"
+    ],
+    "depression": [
+      "major depressive disorder",
+      "clinical depression"
+    ],
+    "alcohol": [
+      "alcohol-related disorders",
+      "alcoholism"
+    ],
+    "gout": [
+      "gouty arthritis",
+      "urate arthritis"
+    ],
+    "arthritis": [
+      "joint inflammation",
+      "osteoarthritis",
+      "rheumatoid arthritis"
+    ],
+    "hypertension": [
+      "high blood pressure",
+      "hyper tension"
+    ],
+    "migraine": [
+      "migraine headache",
+      "hemicrania"
+    ],
+    "epilepsy": [
+      "seizure disorder",
+      "seizure activity"
+    ],
+    "meningitis": [
+      "cerebral meningitis",
+      "spinal meningitis"
+    ],
+    "tuberculosis": [
+      "TB",
+      "consumption"
+    ],
+    "pneumonia": [
+      "lung infection",
+      "lower respiratory infection"
+    ],
+    "malaria": [
+      "malarial infection",
+      "mosquito-borne malaria"
+    ],
+    "cholera": [
+      "cholerae infection",
+      "vibrio cholerae"
+    ],
+    "typhoid": [
+      "enteric fever",
+      "salmonella typhi"
+    ],
+    " HIV": [
+      "human immunodeficiency virus",
+      "aids"
+    ],
+    " STD": [
+      "sexually transmitted disease",
+      "venereal disease"
+    ],
+    " pregnancy": [
+      "gestation",
+      "expectant mother"
+    ],
+    " labor": [
+      "childbirth",
+      "delivery"
+    ],
+    " postpartum": [
+      "after birth",
+      "postnatal"
+    ],
+    " miscarriage": [
+      "spontaneous abortion",
+      "pregnancy loss"
+    ],
+    " abortion": [
+      "termination of pregnancy",
+      "pregnancy termination"
+    ],
+    " contraception": [
+      "birth control",
+      "family planning"
+    ],
+    " menopause": [
+      "change of life",
+      "climacteric"
+    ],
+    " erectile dysfunction": [
+      "impotence",
+      "male impotence"
+    ],
+    " vaginal dryness": [
+      "atrophic vaginitis",
+      "genitourinary syndrome of menopause"
+    ],
+    " osteoporosis": [
+      "bone loss",
+      "brittle bones"
+    ],
+    " osteoarthritis": [
+      "degenerative joint disease",
+      "wear and tear arthritis"
+    ],
+    " rheumatoid arthritis": [
+      "autoimmune arthritis",
+      "chronic arthritis"
+    ],
+    " gout": [
+      "gouty arthritis",
+      "metabolic arthritis"
+    ],
+    " fibromyalgia": [
+      "fibrositis",
+      "muscle pain"
+    ],
+    " chronic fatigue": [
+      "myalgic encephalomyelitis",
+      "systemic exertion intolerance disease"
+    ],
+    " insomnia": [
+      "sleeplessness",
+      "sleep maintenance insomnia"
+    ],
+    " sleep apnea": [
+      "obstructive sleep apnea",
+      "OSA"
+    ],
+    " depression": [
+      "major depressive disorder",
+      "clinical depression"
+    ],
+    " anxiety": [
+      "generalized anxiety disorder",
+      "panic disorder"
+    ],
+    " stress": [
+      "adjustment disorder",
+      "acute stress"
+    ],
+    " burnout": [
+      "occupational burnout",
+      "exhaustion"
+    ],
+    " PTSD": [
+      "post-traumatic stress disorder",
+      "post-traumatic stress"
+    ],
+    " OCD": [
+      "obsessive-compulsive disorder",
+      "obsessive-compulsive"
+    ],
+    " ADHD": [
+      "attention deficit hyperactivity disorder",
+      "attention deficit"
+    ],
+    " autism": [
+      "autism spectrum disorder",
+      "ASD"
+    ],
+    " dementia": [
+      "major neurocognitive disorder",
+      "Alzheimer's disease"
+    ],
+    " delirium": [
+      "acute confusional state",
+      "acute brain failure"
+    ],
+    " hallucination": [
+      "perceptual distortion",
+      "sensory perception"
+    ],
+    " delusion": [
+      "fixed false belief",
+      "false perception"
+    ],
+    " mania": [
+      "bipolar mania",
+      "hypermania"
+    ],
+    " psychosis": [
+      "psychotic disorder",
+      "break from reality"
+    ],
+    " schizo": [
+      "schizophrenia",
+      "schizoaffective"
+    ],
+    " bipolar": [
+      "bipolar disorder",
+      "manic depression"
+    ],
+    " ADHD": [
+      "attention deficit hyperactivity disorder",
+      "attention deficit"
+    ],
+    " autism": [
+      "autism spectrum disorder",
+      "ASD"
+    ],
+    " dementia": [
+      "major neurocognitive disorder",
+      "Alzheimer's disease"
+    ],
+    " delirium": [
+      "acute confusional state",
+      "acute brain failure"
+    ],
+    " hallucination": [
+      "perceptual distortion",
+      "sensory perception"
+    ],
+    " delusion": [
+      "fixed false belief",
+      "false perception"
+    ],
+    " mania": [
+      "bipolar mania",
+      "hypermania"
+    ],
+    " psychosis": [
+      "psychotic disorder",
+      "break from reality"
+    ],
+    " schizo": [
+      "schizophrenia",
+      "schizoaffective"
+    ]
+  },
+  "rules": [
+    {
+      "id": "R001",
+      "pattern": "head + pain",
+      "keywords": [
+        [
+          "head"
+        ],
+        [
+          "pain"
+        ]
+      ],
+      "entries": [
+        "C006",
+        "M006"
+      ],
+      "message": "Rest, drink water and use a cool cloth. Seek care for sudden severe pain, vision changes or confusion.",
+      "emergency": false,
+      "warning": false
+    },
+    {
+      "id": "R002",
+      "pattern": "head + hit/knock/bang/fell/injury",
+      "keywords": [
+        [
+          "head"
+        ],
+        [
+          "hit",
+          "knock",
+          "bang",
+          "fell",
+          "injury"
+        ]
+      ],
+      "entries": [
+        "G036"
+      ],
+      "message": "Stop activity and rest. URGENT: vomiting, drowsiness, a fit or a worsening headache needs hospital.",
+      "emergency": false,
+      "warning": true
+    },
+    {
+      "id": "R003",
+      "pattern": "head + dizzy",
+      "keywords": [
+        [
+          "head"
+        ],
+        [
+          "dizzy"
+        ]
+      ],
+      "entries": [
+        "C036",
+        "G036"
+      ],
+      "message": "Sit or lie down and drink water. Get checked if it follows a head knock.",
+      "emergency": false,
+      "warning": false
+    },
+    {
+      "id": "R004",
+      "pattern": "headache/head + stiff + fever",
+      "keywords": [
+        [
+          "headache",
+          "head"
+        ],
+        [
+          "stiff"
+        ],
+        [
+          "fever"
+        ]
+      ],
+      "entries": [
+        "M007"
+      ],
+      "message": "Possible meningitis. Go to hospital now.",
+      "emergency": true,
+      "warning": true
+    },
+    {
+      "id": "R005",
+      "pattern": "eye + pain",
+      "keywords": [
+        [
+          "eye"
+        ],
+        [
+          "pain"
+        ]
+      ],
+      "entries": [
+        "M047",
+        "C015"
+      ],
+      "message": "Do not rub it. URGENT: an eye injury or loss of vision needs urgent care.",
+      "emergency": false,
+      "warning": true
+    },
+    {
+      "id": "R006",
+      "pattern": "eye + red/itch",
+      "keywords": [
+        [
+          "eye"
+        ],
+        [
+          "red",
+          "itch"
+        ]
+      ],
+      "entries": [
+        "C015",
+        "M044"
+      ],
+      "message": "Clean the eyelids with cooled boiled water and do not share towels.",
+      "emergency": false,
+      "warning": false
+    },
+    {
+      "id": "R007",
+      "pattern": "eye + blur/vision",
+      "keywords": [
+        [
+          "eye"
+        ],
+        [
+          "blur",
+          "vision"
+        ]
+      ],
+      "entries": [
+        "M046",
+        "M045"
+      ],
+      "message": "Gradual blurring may be cataract or glaucoma. Get an eye check.",
+      "emergency": false,
+      "warning": false
+    }
+  ]
+}

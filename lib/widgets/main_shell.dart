@@ -68,7 +68,7 @@ class _MainShellState extends State<MainShell> {
   Widget build(BuildContext context) {
     // Tab screens in bottom-nav order; Profile needs settings + logout callback.
     final tabs = [
-      const HomeScreen(),
+      HomeScreen(settings: widget.settings),
       const KnowledgeScreen(),
       const HistoryScreen(),
       const DoctorsScreen(),

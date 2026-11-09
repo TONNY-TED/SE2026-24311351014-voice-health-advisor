@@ -1,10 +1,10 @@
 {
   "meta": {
     "project": "VoiceHealth",
-    "version": "0.3",
-    "entry_count": 69,
-    "disclaimer": "VoiceHealth provides general health and wellness information only. It does not diagnose medical conditions or prescribe medication, and always encourages users to consult a qualified healthcare professional.",
-    "note": "Starter set. Verify every entry against its listed source and rewrite in your own words before final submission."
+    "version": "0.4",
+    "entry_count": 122,
+    "disclaimer": "VoiceHealth provides general health and wellness information only. It does not diagnose medical conditions or prescribe medication, and always encourages users to consult a qualified healthcare professional. Note: This knowledge base includes MSTG entries (M001-M070), gym/fitness musculoskeletal entries, and common condition entries. For rule-based search with synonyms and pattern matching, refer to assets/keyword_rules.json and the KnowledgeBase class in lib/services/knowledge_base_service.dart",
+    "note": "Updated knowledge base. Contains 24 original entries + 70 MSTG entries (M001-M070) + 50 gym/fitness/musculoskeletal entries. New entries have collision-free IDs. For full rule-based search, see keyword_rules.json"
   },
   "entries": [
     {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 // Import Speech Recognition Module (Week 2: Voice Recognition)
 import 'package:healthcare_assistant/services/speech_service.dart';
+import 'package:healthcare_assistant/services/tts_service.dart';
 
 // Import Authentication Module (register / login / saved profile)
 import 'package:healthcare_assistant/services/auth_service.dart';
@@ -17,6 +18,8 @@ import 'package:healthcare_assistant/screens/sources_screen.dart';
 import 'package:healthcare_assistant/screens/history_screen.dart';
 import 'package:healthcare_assistant/screens/profile_screen.dart';
 import 'package:healthcare_assistant/widgets/main_shell.dart';
+import 'package:healthcare_assistant/widgets/onboarding_tutorial.dart';
+
 
 // Application entry point
 void main() {
@@ -109,17 +112,62 @@ class _AuthGateState extends State<AuthGate> {
 
     if (_loggedIn!) {
       return MainShell(
-        settings: AppSettingsService(),
+        settings: widget.settings,
         onLoggedOut: () => setState(() => _loggedIn = false),
       );
     }
+
+    // Show onboarding tutorial once before login; skip if already seen.
+    if (!widget.settings.introShown) {
+      return OnboardingTutorial(
+        slides: [
+          TutorialSlide.withIndex(
+            image: 'assets/intro/intro1.png',
+            heading: 'Welcome to VoiceHealth',
+            description:
+                'Your personal healthcare assistant — ask health questions by voice or text and get guidance from the clinical knowledge base.',
+            index: 0,
+          ),
+          TutorialSlide.withIndex(
+            image: 'assets/intro/intro2.png',
+            heading: 'Get Trusted Advice',
+            description:
+                'Search our clinical knowledge base for conditions, first aid, nutrition and more. Find answers quickly and reliably.',
+            index: 1,
+          ),
+          TutorialSlide.withIndex(
+            image: 'assets/intro/intro3.png',
+            heading: 'Book with Confidence',
+            description:
+                'Find doctors, book appointments, and manage your health — all in one app. View doctor profiles and schedule consultations.',
+            index: 2,
+          ),
+        ],
+        showSkip: true,
+        onSkip: () {
+          widget.settings.setIntroShown(true);
+          setState(() {});
+        },
+        onNext: () {
+          // onNext is handled by page change; finish called when last slide reached
+        },
+        onBack: () {},
+        onFinish: () {
+          widget.settings.setIntroShown(true);
+          setState(() {});
+        },
+      );
+    }
+
     return LoginScreen(onLoggedIn: () => setState(() => _loggedIn = true));
   }
 }
 
 // Home Screen Widget: Voice Query tab (main health assistant).
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final AppSettingsService settings;
+
+  const HomeScreen({super.key, required this.settings});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -129,6 +177,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final AuthService _auth = AuthService();
   final SpeechService _speechService = SpeechService();
+  final TtsService _ttsService = TtsService();
 
   bool isListening = false;
   String recognizedText = "No voice input yet";
@@ -139,13 +188,22 @@ class _HomeScreenState extends State<HomeScreen> {
   String _detectedLabel = '';
   String _userName = '';
   String _userEmail = '';
+  bool _ttsEnabled = false;
 
   @override
   void initState() {
     super.initState();
     _initSpeech();
+    _initTts();
     _loadProfile();
     _loadKnowledgeBase();
+  }
+
+  Future<void> _initTts() async {
+    final prefsLoaded = widget.settings.ttsEnabled;
+    setState(() => _ttsEnabled = prefsLoaded);
+    await _ttsService.initialize();
+    _ttsService.setEnabled(prefsLoaded);
   }
 
   Future<void> _loadKnowledgeBase() async {
@@ -172,6 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     _textController.dispose();
+    _ttsService.stop();
     super.dispose();
   }
 
@@ -183,6 +242,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (text.trim().isEmpty) {
       _detectedLabel = '';
       healthAdvice = "I did not hear anything. Please tap and speak again.";
+      _speakAdvice();
       return;
     }
 
@@ -195,6 +255,7 @@ class _HomeScreenState extends State<HomeScreen> {
         final body = result.entry!.formattedAdvice;
         healthAdvice = result.isEmergency ? 'EMERGENCY:\n$body' : body;
         _logHistory(text, result.topic, result.intent.name);
+        _speakAdvice();
         return;
       }
     }
@@ -209,6 +270,13 @@ class _HomeScreenState extends State<HomeScreen> {
       _detectedLabel = '';
       healthAdvice =
           "No match found. Try: sleep, water, exercise, diet, stress, malaria, cold, fever or emergency.";
+    }
+    _speakAdvice();
+  }
+
+  Future<void> _speakAdvice() async {
+    if (_ttsEnabled) {
+      await _ttsService.speak(healthAdvice);
     }
   }
 
@@ -633,16 +701,35 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const SizedBox(height: 25),
 
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Health Advice:",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text(
+                  "Health Advice:",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
                 ),
-              ),
+                const Spacer(),
+                IconButton(
+                  icon: Icon(
+                    _ttsEnabled ? Icons.volume_up : Icons.volume_off,
+                    color: Colors.blue.shade700,
+                  ),
+                  tooltip: _ttsEnabled ? 'Turn off voice' : 'Turn on voice',
+                  onPressed: () async {
+                    setState(() => _ttsEnabled = !_ttsEnabled);
+                    await widget.settings.setTtsEnabled(_ttsEnabled);
+                    if (_ttsEnabled) {
+                      await _ttsService.speak(healthAdvice);
+                    } else {
+                      await _ttsService.stop();
+                    }
+                  },
+                ),
+              ],
             ),
 
             if (_detectedLabel.isNotEmpty)

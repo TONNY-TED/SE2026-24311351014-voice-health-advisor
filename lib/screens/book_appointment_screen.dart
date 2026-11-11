@@ -1,6 +1,7 @@
 // Booking Screen: doctor image at top, calendar date grid, time chips,
 // blue Book Appointment button — matches the reference UI design.
 // Nothing is sent automatically — user confirms in the external app.
+// Patient name is no longer required for appointment booking.
 
 import 'dart:io';
 
@@ -21,7 +22,6 @@ class BookAppointmentScreen extends StatefulWidget {
 class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _contactController = TextEditingController();
   final TextEditingController _reasonController = TextEditingController();
 
@@ -45,7 +45,6 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
 
   @override
   void dispose() {
-    _nameController.dispose();
     _contactController.dispose();
     _reasonController.dispose();
     super.dispose();
@@ -68,7 +67,6 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
   bool get _ready =>
       _date != null &&
       _time != null &&
-      _nameController.text.trim().isNotEmpty &&
       _contactController.text.trim().isNotEmpty;
 
   void _selectTime(TimeOfDay time) {
@@ -82,7 +80,6 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
         'Doctor: ${doc.displayName}\n'
         'Date: $_dateLabel\n'
         'Time: $_timeLabel\n'
-        'Patient: ${_nameController.text.trim()}\n'
         'Contact: ${_contactController.text.trim()}\n'
         'Reason: ${_reasonController.text.trim().isEmpty ? '-' : _reasonController.text.trim()}\n\n'
         'Thank you.';
@@ -411,20 +408,6 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
               ),
               const SizedBox(height: 8),
               TextFormField(
-                controller: _nameController,
-                textCapitalization: TextCapitalization.words,
-                decoration: const InputDecoration(
-                  labelText: 'Your name',
-                  prefixIcon: Icon(Icons.person_outline),
-                  border: OutlineInputBorder(),
-                ),
-                validator: (v) => (v == null || v.trim().isEmpty)
-                    ? 'Please enter your name.'
-                    : null,
-                onChanged: (_) => setState(() {}),
-              ),
-              const SizedBox(height: 12),
-              TextFormField(
                 controller: _contactController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
@@ -469,7 +452,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                         ? 'Booking...'
                         : _ready
                             ? 'Book Appointment'
-                            : 'Complete all fields',
+                            : 'Add contact & reason',
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

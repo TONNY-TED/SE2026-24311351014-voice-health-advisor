@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 // Import Speech Recognition Module (Week 2: Voice Recognition)
 import 'package:healthcare_assistant/services/speech_service.dart';
-import 'package:healthcare_assistant/services/tts_service.dart';
 
 // Import Authentication Module (register / login / saved profile)
 import 'package:healthcare_assistant/services/auth_service.dart';
@@ -18,8 +17,7 @@ import 'package:healthcare_assistant/screens/sources_screen.dart';
 import 'package:healthcare_assistant/screens/history_screen.dart';
 import 'package:healthcare_assistant/screens/profile_screen.dart';
 import 'package:healthcare_assistant/widgets/main_shell.dart';
-import 'package:healthcare_assistant/widgets/onboarding_tutorial.dart';
-
+import 'package:healthcare_assistant/theme/app_colors.dart';
 
 // Application entry point
 void main() {
@@ -49,24 +47,110 @@ class _HealthcareAssistantAppState extends State<HealthcareAssistantApp> {
   @override
   Widget build(BuildContext context) {
     if (!_ready) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'VoiceHealth',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        // One brand blue everywhere: #0088E7.
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary)
+            .copyWith(primary: AppColors.primary),
         useMaterial3: true,
+        scaffoldBackgroundColor: AppColors.surface,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: AppColors.surface,
+          foregroundColor: AppColors.primary,
+          surfaceTintColor: Colors.transparent,
+          elevation: 0,
+          centerTitle: true,
+          titleTextStyle: TextStyle(
+            color: AppColors.textPrimary,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        navigationBarTheme: NavigationBarThemeData(
+          backgroundColor: AppColors.surface,
+          indicatorColor: AppColors.primaryTint,
+          iconTheme: WidgetStateProperty.resolveWith((states) {
+            final selected = states.contains(WidgetState.selected);
+            return IconThemeData(
+              color: selected ? AppColors.primary : AppColors.textSecondary,
+            );
+          }),
+          labelTextStyle: WidgetStateProperty.resolveWith((states) {
+            final selected = states.contains(WidgetState.selected);
+            return TextStyle(
+              fontSize: 12,
+              fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+              color: selected ? AppColors.primary : AppColors.textSecondary,
+            );
+          }),
+        ),
+        filledButtonTheme: FilledButtonThemeData(
+          style: FilledButton.styleFrom(
+            backgroundColor: const Color.fromARGB(255, 17, 0, 165),
+            foregroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(14),
+            ),
+          ),
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+            foregroundColor: AppColors.primary,
+            side: const BorderSide(color: AppColors.primary),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(14),
+            ),
+          ),
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(foregroundColor: AppColors.primary),
+        ),
+        checkboxTheme: CheckboxThemeData(
+          fillColor: WidgetStateProperty.resolveWith((states) {
+            return states.contains(WidgetState.selected)
+                ? AppColors.primary
+                : Colors.transparent;
+          }),
+        ),
+        chipTheme: ChipThemeData(
+          backgroundColor: AppColors.surface,
+          selectedColor: AppColors.primary,
+          side: const BorderSide(color: AppColors.border),
+          labelStyle: const TextStyle(color: AppColors.textPrimary),
+          secondaryLabelStyle: const TextStyle(color: Colors.white),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+        progressIndicatorTheme: const ProgressIndicatorThemeData(
+          color: AppColors.primary,
+        ),
         inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: AppColors.fieldFill,
+          hintStyle: const TextStyle(color: AppColors.textSecondary),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: AppColors.border),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: AppColors.border),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: AppColors.primary, width: 2),
           ),
         ),
         cardTheme: const CardThemeData(
           elevation: 2,
+          color: AppColors.surface,
+          surfaceTintColor: Colors.transparent,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(12)),
           ),
@@ -105,69 +189,25 @@ class _AuthGateState extends State<AuthGate> {
   @override
   Widget build(BuildContext context) {
     if (_loggedIn == null) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     if (_loggedIn!) {
       return MainShell(
-        settings: widget.settings,
+        settings: AppSettingsService(),
         onLoggedOut: () => setState(() => _loggedIn = false),
       );
     }
-
-    // Show onboarding tutorial once before login; skip if already seen.
-    if (!widget.settings.introShown) {
-      return OnboardingTutorial(
-        slides: [
-          TutorialSlide.withIndex(
-            image: 'assets/intro/intro1.png',
-            heading: 'Welcome to VoiceHealth',
-            description:
-                'Your personal healthcare assistant — ask health questions by voice or text and get guidance from the clinical knowledge base.',
-            index: 0,
-          ),
-          TutorialSlide.withIndex(
-            image: 'assets/intro/intro2.png',
-            heading: 'Get Trusted Advice',
-            description:
-                'Search our clinical knowledge base for conditions, first aid, nutrition and more. Find answers quickly and reliably.',
-            index: 1,
-          ),
-          TutorialSlide.withIndex(
-            image: 'assets/intro/intro3.png',
-            heading: 'Book with Confidence',
-            description:
-                'Find doctors, book appointments, and manage your health — all in one app. View doctor profiles and schedule consultations.',
-            index: 2,
-          ),
-        ],
-        showSkip: true,
-        onSkip: () {
-          widget.settings.setIntroShown(true);
-          setState(() {});
-        },
-        onNext: () {
-          // onNext is handled by page change; finish called when last slide reached
-        },
-        onBack: () {},
-        onFinish: () {
-          widget.settings.setIntroShown(true);
-          setState(() {});
-        },
-      );
-    }
-
     return LoginScreen(onLoggedIn: () => setState(() => _loggedIn = true));
   }
 }
 
 // Home Screen Widget: Voice Query tab (main health assistant).
 class HomeScreen extends StatefulWidget {
-  final AppSettingsService settings;
-
-  const HomeScreen({super.key, required this.settings});
+  const HomeScreen({
+    super.key,
+    required this.settings,
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -177,7 +217,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final AuthService _auth = AuthService();
   final SpeechService _speechService = SpeechService();
-  final TtsService _ttsService = TtsService();
 
   bool isListening = false;
   String recognizedText = "No voice input yet";
@@ -188,22 +227,13 @@ class _HomeScreenState extends State<HomeScreen> {
   String _detectedLabel = '';
   String _userName = '';
   String _userEmail = '';
-  bool _ttsEnabled = false;
 
   @override
   void initState() {
     super.initState();
     _initSpeech();
-    _initTts();
     _loadProfile();
     _loadKnowledgeBase();
-  }
-
-  Future<void> _initTts() async {
-    final prefsLoaded = widget.settings.ttsEnabled;
-    setState(() => _ttsEnabled = prefsLoaded);
-    await _ttsService.initialize();
-    _ttsService.setEnabled(prefsLoaded);
   }
 
   Future<void> _loadKnowledgeBase() async {
@@ -230,7 +260,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     _textController.dispose();
-    _ttsService.stop();
     super.dispose();
   }
 
@@ -242,7 +271,6 @@ class _HomeScreenState extends State<HomeScreen> {
     if (text.trim().isEmpty) {
       _detectedLabel = '';
       healthAdvice = "I did not hear anything. Please tap and speak again.";
-      _speakAdvice();
       return;
     }
 
@@ -255,7 +283,6 @@ class _HomeScreenState extends State<HomeScreen> {
         final body = result.entry!.formattedAdvice;
         healthAdvice = result.isEmergency ? 'EMERGENCY:\n$body' : body;
         _logHistory(text, result.topic, result.intent.name);
-        _speakAdvice();
         return;
       }
     }
@@ -268,15 +295,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _logHistory(text, topic.title, 'wellness');
     } else {
       _detectedLabel = '';
-      healthAdvice =
-          "No match found. Try: sleep, water, exercise, diet, stress, malaria, cold, fever or emergency.";
-    }
-    _speakAdvice();
-  }
-
-  Future<void> _speakAdvice() async {
-    if (_ttsEnabled) {
-      await _ttsService.speak(healthAdvice);
+      healthAdvice = "No match found. Try: sleep, water, exercise, diet, stress, malaria, cold, fever or emergency.";
     }
   }
 
@@ -318,8 +337,7 @@ class _HomeScreenState extends State<HomeScreen> {
       await _speechService.startListening(
         onText: (text) {
           setState(() {
-            recognizedText =
-                text.isEmpty ? "Listening... please speak" : text;
+            recognizedText = text.isEmpty ? "Listening... please speak" : text;
             _updateAdvice(text);
           });
         },
@@ -374,7 +392,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
           child: Column(
             children: [
-
               const SizedBox(height: 8),
 
               const Text(
@@ -393,11 +410,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 "Ask health questions by voice or text and get guidance "
                 "from the clinical knowledge base.",
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Colors.grey,
-                  height: 1.4,
-                ),
+                style: TextStyle(fontSize: 13, color: Colors.grey, height: 1.4),
               ),
 
               const SizedBox(height: 24),
@@ -406,11 +419,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [primary, primary.withOpacity(0.85)],
-                  ),
+                  color: AppColors.primary,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Column(
@@ -421,11 +430,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         Container(
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
+                            color: Colors.white.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: const Icon(Icons.health_and_safety,
-                              color: Colors.white, size: 32),
+                          child: const Icon(
+                            Icons.health_and_safety,
+                            color: Colors.white,
+                            size: 32,
+                          ),
                         ),
                         const SizedBox(width: 12),
                         Expanded(
@@ -505,9 +517,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => ProfileScreen(
-                              settings: AppSettingsService(),
-                            ),
+                            builder: (_) =>
+                                ProfileScreen(settings: AppSettingsService()),
                           ),
                         );
                       },
@@ -531,10 +542,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const SizedBox(height: 24),
 
-              Card(
-                elevation: 0,
-                color: Colors.grey.shade50,
-                shape: RoundedRectangleBorder(
+              Container(
+                width: double.infinity,
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                decoration: BoxDecoration(
+                  color: AppColors.primary,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Padding(
@@ -546,11 +558,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         borderRadius: BorderRadius.circular(40),
                         child: CircleAvatar(
                           radius: 36,
-                          backgroundColor: Colors.blue.shade50,
+                          backgroundColor: Colors.white,
                           child: Icon(
                             isListening ? Icons.mic : Icons.mic_none,
                             size: 36,
-                            color: Colors.blue.shade700,
+                            color: AppColors.primary,
                           ),
                         ),
                       ),
@@ -559,10 +571,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                       const Text(
                         "Tap microphone to speak",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey,
-                        ),
+                        style: TextStyle(fontSize: 14, color: Colors.white),
                       ),
 
                       const SizedBox(height: 16),
@@ -571,17 +580,26 @@ class _HomeScreenState extends State<HomeScreen> {
                         controller: _textController,
                         decoration: InputDecoration(
                           hintText: "e.g. How much water should I drink?",
+                          filled: true,
+                          fillColor: Colors.white,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: Colors.grey.shade300),
+                            borderSide: const BorderSide(
+                              color: AppColors.border,
+                            ),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: Colors.grey.shade300),
+                            borderSide: const BorderSide(
+                              color: AppColors.border,
+                            ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: primary, width: 2),
+                            borderSide: const BorderSide(
+                              color: AppColors.primary,
+                              width: 2,
+                            ),
                           ),
                           contentPadding: const EdgeInsets.symmetric(
                             horizontal: 16,
@@ -598,16 +616,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 52,
                         child: FilledButton.icon(
                           onPressed: _submitTypedText,
-                          icon: const Icon(Icons.analytics_outlined,
-                              size: 20),
-                          label: const Text("Analyze & Recommend",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              )),
+                          icon: const Icon(Icons.analytics_outlined, size: 20),
+                          label: const Text(
+                            "Analyze & Recommend",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                           style: FilledButton.styleFrom(
-                            backgroundColor: Colors.blue.shade700,
-                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.white,
+                            foregroundColor: AppColors.primary,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -648,8 +667,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             _submitTypedText();
                           },
                           style: OutlinedButton.styleFrom(
-                            foregroundColor: Colors.black87,
-                            side: BorderSide(color: Colors.grey.shade300),
+                            foregroundColor: AppColors.primary,
+                            side: const BorderSide(color: AppColors.border),
                             backgroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -671,40 +690,39 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const SizedBox(height: 24),
 
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Recognized Text:",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Recognized Text:",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
                 ),
               ),
-            ),
 
-            const SizedBox(height: 10),
+              const SizedBox(height: 10),
 
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey.shade300),
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.border),
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                child: Text(
+                  recognizedText,
+                  style: const TextStyle(fontSize: 15, color: Colors.black87),
+                ),
               ),
-              child: Text(
-                recognizedText,
-                style: const TextStyle(fontSize: 15, color: Colors.black87),
-              ),
-            ),
 
-            const SizedBox(height: 25),
+              const SizedBox(height: 25),
 
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text(
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
                   "Health Advice:",
                   style: TextStyle(
                     fontSize: 18,
@@ -712,72 +730,57 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.black87,
                   ),
                 ),
-                const Spacer(),
-                IconButton(
-                  icon: Icon(
-                    _ttsEnabled ? Icons.volume_up : Icons.volume_off,
-                    color: Colors.blue.shade700,
-                  ),
-                  tooltip: _ttsEnabled ? 'Turn off voice' : 'Turn on voice',
-                  onPressed: () async {
-                    setState(() => _ttsEnabled = !_ttsEnabled);
-                    await widget.settings.setTtsEnabled(_ttsEnabled);
-                    if (_ttsEnabled) {
-                      await _ttsService.speak(healthAdvice);
-                    } else {
-                      await _ttsService.stop();
-                    }
-                  },
-                ),
-              ],
-            ),
+              ),
 
-            if (_detectedLabel.isNotEmpty)
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 4),
-                  child: Text(
-                    _detectedLabel,
-                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+              if (_detectedLabel.isNotEmpty)
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 4),
+                    child: Text(
+                      _detectedLabel,
+                      style: const TextStyle(fontSize: 12, color: Colors.grey),
+                    ),
+                  ),
+                ),
+
+              const SizedBox(height: 10),
+
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: AppColors.primaryTint,
+                  border: const Border(
+                    left: BorderSide(color: AppColors.primary, width: 4),
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  healthAdvice,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    color: Colors.black87,
+                    height: 1.4,
                   ),
                 ),
               ),
 
-            const SizedBox(height: 10),
-
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                color: Colors.blue.shade50,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Text(
-                healthAdvice,
+              const SizedBox(height: 10),
+              Text(
+                KnowledgeBaseService.disclaimer,
                 style: const TextStyle(
-                  fontSize: 15,
-                  color: Colors.black87,
+                  fontSize: 12,
+                  color: Colors.grey,
+                  fontStyle: FontStyle.italic,
                   height: 1.4,
                 ),
+                textAlign: TextAlign.center,
               ),
-            ),
 
-            const SizedBox(height: 10),
-            Text(
-              KnowledgeBaseService.disclaimer,
-              style: const TextStyle(
-                fontSize: 12,
-                color: Colors.grey,
-                fontStyle: FontStyle.italic,
-                height: 1.4,
-              ),
-              textAlign: TextAlign.center,
-            ),
-
-            const SizedBox(height: 20),
-          ],
-        ),
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
     );

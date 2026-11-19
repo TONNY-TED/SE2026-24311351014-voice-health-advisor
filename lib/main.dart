@@ -28,7 +28,9 @@ void main() {
 
 // Main Application Widget (loads persisted theme + font scale first).
 class HealthcareAssistantApp extends StatefulWidget {
-  const HealthcareAssistantApp({super.key});
+  const HealthcareAssistantApp({super.key,
+    required this.settings,
+  });
 
   @override
   State<HealthcareAssistantApp> createState() => _HealthcareAssistantAppState();

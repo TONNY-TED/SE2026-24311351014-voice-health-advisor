@@ -3,7 +3,7 @@
 // Clear button wipes only this user's rows after confirmation.
 
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../services/auth_service.dart';
 import '../services/local_db_service.dart';

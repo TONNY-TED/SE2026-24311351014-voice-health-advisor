@@ -1,6 +1,6 @@
 // Help Screen: how to use VoiceHealth — read-only guide.
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class HelpScreen extends StatelessWidget {
   const HelpScreen({super.key});

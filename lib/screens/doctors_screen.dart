@@ -1,7 +1,7 @@
 // Doctors Screen: consultation destination for the bottom navigation.
 // Reuses the existing DoctorSection cards + booking flow unchanged.
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../widgets/doctor_section.dart';
 

@@ -1,7 +1,7 @@
 // Sources Screen: lists the real authorities behind every answer.
 // Each card shows what to verify there and the API when one exists.
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../services/source_registry.dart';
 

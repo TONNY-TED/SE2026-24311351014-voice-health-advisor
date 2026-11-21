@@ -1,6 +1,6 @@
 // Register Screen: create account, then return to login to sign in.
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../services/auth_service.dart';
 
@@ -83,7 +83,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       borderRadius: BorderRadius.circular(28),
                       boxShadow: [
                         BoxShadow(
-                          color: primary.withOpacity(0.25),
+                          color: primary.withValues(alpha: 0.25),
                           blurRadius: 24,
                           offset: const Offset(0, 12),
                         ),

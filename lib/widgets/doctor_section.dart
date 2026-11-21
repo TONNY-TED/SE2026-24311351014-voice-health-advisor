@@ -2,7 +2,7 @@
 // Placed near the bottom of HomeScreen. Matches the reference UI design
 // with large doctor image at top, name below, then details.
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../data/doctor_data.dart';
 import '../screens/book_appointment_screen.dart';

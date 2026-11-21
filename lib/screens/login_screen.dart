@@ -3,7 +3,7 @@
 // register link. Animated fade + slide entrance; responsive sizing.
 // Logic (AuthService + validation) unchanged — social buttons removed.
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../services/auth_service.dart';
 import 'register_screen.dart';

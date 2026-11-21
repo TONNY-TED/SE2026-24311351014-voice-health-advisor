@@ -2,7 +2,7 @@
 // Search + category filter; tap an entry for content, tips and source.
 // Read-only view over KnowledgeBaseService — no logic changes.
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../services/knowledge_base_service.dart';
 import 'sources_screen.dart';

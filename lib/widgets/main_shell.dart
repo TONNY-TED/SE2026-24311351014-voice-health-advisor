@@ -2,7 +2,7 @@
 // Roadmap stays reachable from Settings so all six destinations keep access.
 // Tab switches fade in; each tab keeps its own state (e.g. typed text).
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../main.dart' show HomeScreen;
 import '../services/app_settings_service.dart';

@@ -1,6 +1,6 @@
 // Import Flutter Material package
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 // Import Speech Recognition Module (Week 2: Voice Recognition)
 import 'package:healthcare_assistant/services/speech_service.dart';
@@ -56,25 +56,28 @@ class _HealthcareAssistantAppState extends State<HealthcareAssistantApp> {
       );
     }
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'VoiceHealth',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-        inputDecorationTheme: InputDecorationTheme(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'VoiceHealth',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+          useMaterial3: true,
+          inputDecorationTheme: InputDecorationTheme(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          cardTheme: const CardThemeData(
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+            ),
           ),
         ),
-        cardTheme: const CardThemeData(
-          elevation: 2,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(12)),
-          ),
-        ),
+        home: AuthGate(settings: _settings),
       ),
-      home: AuthGate(settings: _settings),
     );
   }
 }
@@ -411,7 +414,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [primary, primary.withOpacity(0.85)],
+                    colors: [primary, primary.withValues(alpha: 0.85)],
                   ),
                   borderRadius: BorderRadius.circular(16),
                 ),
@@ -423,7 +426,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Container(
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
+                            color: Colors.white.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: const Icon(Icons.health_and_safety,

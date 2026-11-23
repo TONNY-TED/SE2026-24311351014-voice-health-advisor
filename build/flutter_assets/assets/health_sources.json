@@ -1,0 +1,52 @@
+{
+  "sources": [
+    {
+      "id": "who",
+      "name": "WHO Fact Sheets",
+      "url": "https://www.who.int/news-room/fact-sheets",
+      "use_for": "Malaria, hypertension, diabetes, diet, physical activity, immunization, water, cholera.",
+      "how": "Open the fact sheet, rewrite the key facts in your own words, keep the entry source as 'WHO - <sheet name>'.",
+      "api": null
+    },
+    {
+      "id": "cdc",
+      "name": "CDC (US Centers for Disease Control)",
+      "url": "https://www.cdc.gov",
+      "use_for": "Conditions, prevention, vaccines, emergency warning signs.",
+      "how": "Search cdc.gov for the condition, use the prevention/symptoms section, cite 'CDC - <page>'.",
+      "api": null
+    },
+    {
+      "id": "medlineplus",
+      "name": "MedlinePlus (US National Library of Medicine)",
+      "url": "https://medlineplus.gov",
+      "use_for": "Plain-language drug and condition pages (paracetamol, ibuprofen, diabetes).",
+      "how": "Use the topic page summary; cite 'MedlinePlus - <topic>'. Has MedlinePlus Connect API for coded lookup.",
+      "api": "https://medlineplus.gov/connect/"
+    },
+    {
+      "id": "nhs",
+      "name": "NHS Conditions",
+      "url": "https://www.nhs.uk/conditions",
+      "use_for": "Sleep, hydration, handwashing, fever, paracetamol, ibuprofen, colds.",
+      "how": "Use the Conditions A-Z page, rewrite self-care steps, cite 'NHS - <page>'.",
+      "api": null
+    },
+    {
+      "id": "openfda",
+      "name": "OpenFDA (US FDA drug data)",
+      "url": "https://open.fda.gov",
+      "use_for": "Structured drug labels and adverse events (JSON API, free, no key for basic use).",
+      "how": "Query api.fda.gov/drug/label.json e.g. ?search=openfda.brand_name:paracetamol. Store key facts + source 'OpenFDA - <drug>'.",
+      "api": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22paracetamol%22&limit=1"
+    },
+    {
+      "id": "icd11",
+      "name": "WHO ICD-11 Classification",
+      "url": "https://www.who.int/standards/classifications/classification-of-diseases",
+      "use_for": "Coded disease names for condition field (e.g. malaria, hypertension codes).",
+      "how": "Look up the condition code, store it in the entry condition field. Needs a free token for API use.",
+      "api": "https://icd.who.int/icdapi"
+    }
+  ]
+}

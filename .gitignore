@@ -27,10 +27,13 @@ migrate_working_dir/
 **/doc/api/
 **/ios/Flutter/.last_build_id
 .dart_tool/
+.flutter-plugins
 .flutter-plugins-dependencies
+.packages
 .pub-cache/
 .pub/
 /build/
+build/
 /coverage/
 
 # Symbolication related
@@ -44,8 +47,14 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# Android
+android/.kotlin/
+
 # Widget Preview related
 .widget_preview/
+
+# Local Flutter SDK checkout (not part of the app)
+flutter/
 
 # Large output files exceeding GitHub LFS limit (100MB)
 analysis_output.txt

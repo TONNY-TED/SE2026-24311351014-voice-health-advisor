@@ -88,14 +88,14 @@ class _LoginScreenState extends State<LoginScreen>
 
     return Scaffold(
       body: Container(
-        // Full-screen background image with a blue overlay for readability.
+        // Full-screen background image with a 30% dark blue overlay.
         decoration: const BoxDecoration(
           color: Color.fromARGB(255, 0, 55, 175), // fallback if image missing
           image: DecorationImage(
             image: AssetImage('assets/bg.png'),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
-              Color(0x99002266),
+              Color(0x4D002266),
               BlendMode.darken,
             ),
           ),

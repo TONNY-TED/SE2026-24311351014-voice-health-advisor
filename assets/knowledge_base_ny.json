@@ -1,0 +1,1012 @@
+{
+  "meta": {
+    "project": "VoiceHealth",
+    "language": "Chichewa",
+    "version": "0.1",
+    "entry_count": 50,
+    "disclaimer": "Izi ndi chidziwitso chokha — si kudziwitsa matenda kapena kupereka mankhwala. Nthawi zonse funsani wogwira ntchito yazaumoyo ngati simukudziwa.",
+    "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+  },
+  "entries": [
+    {
+      "entry_id": "C001",
+      "topic_ny": "Chimfine",
+      "condition_ny": "Matenda a kachilombo a mphuno ndi pakhosi",
+      "keywords_ny": [
+        "chimfine",
+        "mphuno yotsekeka",
+        "mphuno ikuyenda",
+        "kuyetsemula",
+        "kuzizira"
+      ],
+      "content_ny": "Chimfine ndi matenda ofatsa a kachilombo m'mphuno ndi pakhosi. Anthu ambiri amachira okha pakadutsa masabata 1 kapena 2.",
+      "tips_ny": [
+        "Mupumule ndi kumwa madzi ambiri",
+        "Imwani paracetamol kapena ibuprofen monga mwauzidwa palemba la mankhwala kuti muchepetse kupweteka ndi kutentha thupi",
+        "Sambani m'manja pafupipafupi ndipo gwiritsani nsalu poyetsemula kuti musapatsire ena"
+      ],
+      "see_doctor_if_ny": "Zizindikiro zikamatha masabata oposa atatu, mukavutika kupuma kapena kumva kupweteka pachifuwa, kapena khanda kapena munthu wodwala matenda a nthawi yaitali akadwala kwambiri, pitani kuchipatala.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C002",
+      "topic_ny": "Chimfine champhamvu (fuluwenza)",
+      "condition_ny": "Matenda a kachilombo oyamba mwadzidzidzi ndi kutentha thupi ndi kupweteka kwa minofu",
+      "keywords_ny": [
+        "fuluwenza",
+        "chimfine champhamvu",
+        "kupweteka thupi",
+        "kuzizira",
+        "kutentha thupi"
+      ],
+      "content_ny": "Fuluwenza ndi matenda a kachilombo omwe amayamba mwadzidzidzi ndi kutentha thupi, kupweteka kwa minofu ndi kutopa. Anthu ambiri athanzi amachira pakadutsa pafupifupi sabata imodzi.",
+      "tips_ny": [
+        "Mupumule, mudziphimbe bwino ndi kumwa madzi ambiri",
+        "Imwani paracetamol monga mwauzidwa kuti muchepetse kutentha thupi ndi kupweteka",
+        "Khalani panyumba pamene mukudwala kuti musapatsire ena"
+      ],
+      "see_doctor_if_ny": "Mukamva kupweteka pachifuwa kapena kuvutika kupuma, zizindikiro zikapanda kuchepa pakatha sabata, kapena ngati muli ndi pakati, ndinu wachikulire, mwana wamng'ono, kapena muli ndi matenda a nthawi yaitali, pitani kuchipatala.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C003",
+      "topic_ny": "Chifuwa",
+      "condition_ny": "Kukhosomola kwa nthawi yochepa kapena yaitali",
+      "keywords_ny": [
+        "chifuwa",
+        "kukhosomola",
+        "chifuwa chouma",
+        "chifuwa cha usiku",
+        "kukhosomola kwambiri"
+      ],
+      "content_ny": "Zifuwa zambiri zimayamba chifukwa cha matenda monga chimfine ndipo nthawi zambiri zimatha zokha pakadutsa masabata atatu.",
+      "tips_ny": [
+        "Imwani zakumwa zotentha; uchi ndi mandimu zimatha kuchepetsa chifuwa (musapatse uchi mwana wosakwana chaka chimodzi)",
+        "Mupumule ndi kumwa madzi ambiri",
+        "Pewani utsi ndi zinthu zina zokwiyitsa"
+      ],
+      "see_doctor_if_ny": "Chifuwa chikatha masabata awiri kapena atatu kapena kuposerapo, mukakhosomola magazi, kuonda, kutuluka thukuta usiku, kupweteka pachifuwa kapena kupuma movutikira, pitani kuchipatala. Chifuwa cha masabata awiri kapena kuposerapo chiyenera kuyezedwa TB.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C004",
+      "topic_ny": "Kupweteka pakhosi",
+      "condition_ny": "Pakhosi pakupweteka kapena kukanda",
+      "keywords_ny": [
+        "pakhosi",
+        "kupweteka pakhosi",
+        "kumeza movutikira",
+        "tonsil",
+        "pakhosi pakukanda"
+      ],
+      "content_ny": "Kupweteka pakhosi kochuluka kumayamba chifukwa cha kachilombo ndipo kumatha pakadutsa pafupifupi sabata popanda maantibayotiki.",
+      "tips_ny": [
+        "Gargulani ndi madzi ofunda a mchere (akuluakulu ndi ana akuluakulu)",
+        "Imwani zakumwa zozizira kapena zofunda zambiri",
+        "Imwani paracetamol monga mwauzidwa kuti muchepetse ululu"
+      ],
+      "see_doctor_if_ny": "Mukavutika kumeza kapena kupuma, mukatulutsa malovu osalekeza, mukakhala ndi kutentha thupi kwambiri, kapena pakhosi pakapitirira kupweteka kupitirira sabata, pitani kuchipatala.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C005",
+      "topic_ny": "Kutentha thupi",
+      "condition_ny": "Kutentha kwa thupi kwambiri",
+      "keywords_ny": [
+        "kutentha thupi",
+        "malungo",
+        "thupi likutentha",
+        "kuzizira thupi",
+        "kutentha"
+      ],
+      "content_ny": "Kutentha thupi ndi pamene thupi limatentha pafupifupi 38 digiri C kapena kuposerapo. Ndi chizindikiro choti thupi likulimbana ndi matenda. M'madera omwe muli malungo, aliyense wotentha thupi ayenera kuyezedwa malungo.",
+      "tips_ny": [
+        "Mupumule ndi kumwa madzi ambiri",
+        "Valani zovala zopepuka ndipo chipinda chizizirire",
+        "Imwani paracetamol monga mwauzidwa palemba la mankhwala"
+      ],
+      "see_doctor_if_ny": "Mwana wosakwana miyezi itatu akatentha thupi, kapena kutentha thupi kukakhala ndi khosi lolimba, kusokonezeka maganizo, khunyu, totupa tosazimiririka mukatikanikiza ndi galasi, kapena kutenga masiku opitirira atatu, pitani kuchipatala. M'dera la malungo, yezetsani malungo tsiku lomwelo.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C006",
+      "topic_ny": "Kupweteka mutu",
+      "condition_ny": "Kupweteka kwa mutu",
+      "keywords_ny": [
+        "mutu ukupweteka",
+        "kupweteka mutu",
+        "mutu",
+        "migraine",
+        "mutu wakugunda"
+      ],
+      "content_ny": "Kupweteka mutu kochuluka kumayamba chifukwa cha kupsinjika maganizo ndipo kumatha kuchepetsedwa ndi kupumula, kumwa madzi ndi mankhwala ochepetsa ululu ogulitsa m'masitolo.",
+      "tips_ny": [
+        "Imwani madzi ndi kupumula pamalo abata, amdima",
+        "Ikani nsalu yozizira pamphumi",
+        "Imwani paracetamol kapena ibuprofen monga mwauzidwa"
+      ],
+      "see_doctor_if_ny": "Mukakhala ndi mutu wopweteka kwambiri woyamba mwadzidzidzi, kapena mutu ndi kusintha kwa kuona, kusokonezeka maganizo kapena khosi lolimba, pitani kuchipatala nthawi yomweyo.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C007",
+      "topic_ny": "Kutsegula m'mimba",
+      "condition_ny": "Chimbudzi chamadzi",
+      "keywords_ny": [
+        "kutsegula m'mimba",
+        "chimbudzi chamadzi",
+        "kuthamanga m'mimba",
+        "m'mimba mukuyenda",
+        "ORS"
+      ],
+      "content_ny": "Kutsegula m'mimba ndi kupita kuchimbudzi chamadzi katatu kapena kuposerapo pa tsiku. Choopsa chachikulu ndi kuchepa kwa madzi m'thupi, komwe kungapewedwe ndi madzi a shuga ndi mchere (ORS).",
+      "tips_ny": [
+        "Imwani madzi ambiri ndi ORS kuti mubwezere madzi ndi mchere omwe mwataya",
+        "Pitirizani kudya zakudya zochepa pafupipafupi",
+        "Sambani m'manja ndi sopo mukatuluka kuchimbudzi ndi musanaphike chakudya"
+      ],
+      "see_doctor_if_ny": "Mukapeza magazi mu chimbudzi, kutsegula m'mimba kukapitirira masiku opitirira 7, kutentha thupi kwambiri, kapena zizindikiro za kuchepa madzi m'thupi monga ludzu lalikulu, mkodzo wakuda, chizungulire kapena mkodzo wochepa, pitani kuchipatala.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C008",
+      "topic_ny": "Kusanza",
+      "condition_ny": "Kumva nseru ndi kusanza",
+      "keywords_ny": [
+        "kusanza",
+        "nseru",
+        "kumva kudwala",
+        "m'mimba mukudwala",
+        "kusanza kwambiri"
+      ],
+      "content_ny": "Kusanza nthawi zambiri kumayamba chifukwa cha matenda a m'mimba kapena chakudya chosakhala bwino ndipo nthawi zambiri kumatha pakadutsa tsiku limodzi kapena awiri.",
+      "tips_ny": [
+        "Imwani madzi kapena ORS pang'ono pang'ono pafupipafupi",
+        "Mupumule ndipo musadye zakudya zolimba mpaka kusanza kuchepe",
+        "Mukamva bwino, yambaninso kudya zakudya zosavuta zochepa"
+      ],
+      "see_doctor_if_ny": "Mukasanza kupitirira masiku awiri, kusanza magazi, kupweteka kwambiri m'mimba, mutu waukulu ndi khosi lolimba, kapena zizindikiro zakuchepa madzi m'thupi, pitani kuchipatala.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C009",
+      "topic_ny": "Kudzimbidwa",
+      "condition_ny": "Kulephera kupita kuchimbudzi kapena chimbudzi cholimba",
+      "keywords_ny": [
+        "kudzimbidwa",
+        "chimbudzi cholimba",
+        "kulephera kupita kuchimbudzi",
+        "kukanikiza",
+        "kusachita chimbudzi"
+      ],
+      "content_ny": "Kudzimbidwa ndi kupita kuchimbudzi kocheperapo kuposa nthawi zonse, kapena chimbudzi cholimba ndi chopweteka. Nthawi zambiri kumatha kusintha ndi kusintha zakudya ndi moyo.",
+      "tips_ny": [
+        "Idyani zakudya zambiri za ulusi monga zipatso, ndiwo zamasamba, nyemba ndi mbewu zosakonzedwa",
+        "Imwani madzi ambiri",
+        "Chitani masewera olimbitsa thupi ndipo pitani kuchimbudzi mukamva kufuna"
+      ],
+      "see_doctor_if_ny": "Mukapeza magazi mu chimbudzi, kupweteka kwambiri m'mimba, kuonda popanda chifukwa, kapena kudzimbidwa kukapanda kusintha pakadutsa pafupifupi sabata la kusintha zakudya, pitani kuchipatala.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C010",
+      "topic_ny": "Kutentha pamtima ndi kusagaya chakudya",
+      "condition_ny": "Kumva kutentha pachifuwa kapena m'mimba chapamwamba",
+      "keywords_ny": [
+        "kutentha pamtima",
+        "kusagaya chakudya",
+        "asidi",
+        "pachifuwa pakutentha",
+        "m'mimba mukuyaka"
+      ],
+      "content_ny": "Kutentha pamtima ndi kusagaya chakudya kumachitika pamene asidi wa m'mimba amakwiyitsa chitoliro cha chakudya kapena m'mimba. Kusintha moyo nthawi zambiri kumathandiza.",
+      "tips_ny": [
+        "Idyani chakudya chochepa pa nthawi ndipo musadye usiku kwambiri",
+        "Muchepetse zakudya zamafuta kapena zokometsera, mowa ndi khofi",
+        "Musasute fodya, ndipo kwezani mutu mukamagona"
+      ],
+      "see_doctor_if_ny": "Mukavutika kumeza, kusanza mobwerezabwereza, chimbudzi chakuda, kuonda popanda chifukwa, kapena kupweteka pachifuwa komwe kungakhale kwa mtima, pitani kuchipatala.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C011",
+      "topic_ny": "Kupweteka msana",
+      "condition_ny": "Ululu wa msana",
+      "keywords_ny": [
+        "msana ukupweteka",
+        "kupweteka msana",
+        "ululu wa msana",
+        "kupweteka kwa kumunsi kwa msana",
+        "msana"
+      ],
+      "content_ny": "Kupweteka msana kochuluka kumachira pakadutsa masabata ochepa. Kukhala wokangalika nthawi zambiri kumathandiza kuposa kugona pabedi nthawi yaitali.",
+      "tips_ny": [
+        "Pitirizani kuyenda ndi kuchita zinthu zofewa monga momwe ululu ukuloleza",
+        "Gwiritsani nsalu yotentha kapena yozizira pamalo opweteka",
+        "Imwani paracetamol monga mwauzidwa palemba la mankhwala"
+      ],
+      "see_doctor_if_ny": "Mukamva kusowa kumva pozungulira ntchafu kapena matako, kulephera kuletsa mkodzo kapena chimbudzi, kufooka kwa miyendo, kutentha thupi, kupweteka pambuyo povulala, kapena ululu wosachira pakadutsa masabata angapo, pitani kuchipatala.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C012",
+      "topic_ny": "Kupweteka dzino",
+      "condition_ny": "Ululu mu dzino kapena pafupi ndi dzino",
+      "keywords_ny": [
+        "dzino likupweteka",
+        "kupweteka dzino",
+        "mano",
+        "chiseyeye",
+        "dzino lobowoka"
+      ],
+      "content_ny": "Kupweteka dzino nthawi zambiri kumayamba chifukwa cha kuwola kwa dzino kapena matenda a chiseyeye, ndipo kumafunika dokotala wa mano kapena wogwira ntchito yazaumoyo wa mkamwa kuti athetse chomwe chayambitsa.",
+      "tips_ny": [
+        "Tsukulani mkamwa mofatsa ndi madzi ofunda a mchere",
+        "Pewani zakudya ndi zakumwa zotentha kwambiri, zozizira kwambiri kapena zotsekemera",
+        "Imwani paracetamol monga mwauzidwa, ndipo tsukani mano ndi mankhwala a mano a fluoride"
+      ],
+      "see_doctor_if_ny": "Nkhope kapena nsagwada zikatupa, mukatentha thupi, kapena mukavutika kumeza kapena kupuma (ndi zadzidzidzi), kapena dzino likapitirira kupweteka kupitirira tsiku limodzi kapena awiri, pitani kuchipatala kapena kwa dokotala wa mano.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C013",
+      "topic_ny": "Totupa ndi kuyabwa pakhungu",
+      "condition_ny": "Khungu loyabwa kapena lokwiya",
+      "keywords_ny": [
+        "totupa",
+        "kuyabwa",
+        "khungu likuyabwa",
+        "zotupa",
+        "khungu lofiira"
+      ],
+      "content_ny": "Totupa ndi kuyabwa pakhungu zambiri zimakhala zofatsa, zimayamba chifukwa cha kukwiya, ziwengo kapena matenda ang'onoang'ono, ndipo zimatha ndi chisamaliro chosavuta.",
+      "tips_ny": [
+        "Pewani kukanda ndipo sungani khungu lozizira",
+        "Siyani kugwiritsa ntchito sopo, mafuta kapena chinthu chatsopano chomwe chingakhale chomwe chayambitsa",
+        "Pakani mafuta ofewetsa khungu opanda fungo"
+      ],
+      "see_doctor_if_ny": "Totupa tikakhala ndi kutentha thupi, tikamafalikira mwachangu, kutuluka matuza, kapena tosazimiririka mukatikanikiza ndi galasi, pitani kuchipatala. Milomo kapena nkhope kutupa kapena kupuma movutikira ndi zadzidzidzi.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C014",
+      "topic_ny": "Kupweteka khutu",
+      "condition_ny": "Ululu mkhutu",
+      "keywords_ny": [
+        "khutu likupweteka",
+        "kupweteka khutu",
+        "matenda a khutu",
+        "madzi otuluka m'khutu",
+        "khutu"
+      ],
+      "content_ny": "Kupweteka khutu nthawi zambiri kumayamba chifukwa cha matenda a khutu ndipo nthawi zambiri kumatha pakadutsa masiku ochepa.",
+      "tips_ny": [
+        "Imwani paracetamol monga mwauzidwa kuti muchepetse ululu",
+        "Gwiritsani nsalu yofunda pa khutu",
+        "Musalowetse kalikonse mkati mwa khutu"
+      ],
+      "see_doctor_if_ny": "Mukaona madzi kapena mafinya akutuluka m'khutu, kusamva bwino, kutupa kumbuyo kwa khutu, kutentha thupi kwambiri, kapena zizindikiro zikatha masiku opitirira atatu, pitani kuchipatala.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C015",
+      "topic_ny": "Maso ofiira kapena opweteka",
+      "condition_ny": "Kutupa kwa maso (conjunctivitis)",
+      "keywords_ny": [
+        "maso ofiira",
+        "maso opweteka",
+        "maso akuyabwa",
+        "madzi otuluka m'maso",
+        "conjunctivitis"
+      ],
+      "content_ny": "Conjunctivitis ndi matenda kapena ziwengo za m'maso zomwe zimapangitsa maso kukhala ofiira, omata kapena otulutsa madzi. Mitundu yopatsirana nthawi zambiri imatha pakadutsa masabata 1 kapena 2.",
+      "tips_ny": [
+        "Pukutani zikope ndi madzi owiritsa ozizira ndi thonje loyera",
+        "Sambani m'manja pafupipafupi ndipo musagawane matawulo",
+        "Pewani kukhudza kapena kupukusa maso"
+      ],
+      "see_doctor_if_ny": "Mukamva kupweteka kwambiri m'maso, kusintha kwa kuona, kuvutika ndi kuwala, kuvulala m'maso, kapena mwana wakhanda ali ndi maso ofiira kapena omata, pitani kuchipatala.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C016",
+      "topic_ny": "Malungo",
+      "condition_ny": "Matenda a tizilombo otengedwa ndi udzudzu",
+      "keywords_ny": [
+        "malungo",
+        "udzudzu",
+        "kutentha thupi ndi kuzizira",
+        "ukonde wa udzudzu",
+        "kuyezetsa malungo"
+      ],
+      "content_ny": "Malungo ndi matenda oopsa omwe amafalitsidwa ndi kulumidwa ndi udzudzu wa Anopheles wamkazi wodwala. Zizindikiro zoyamba ndi kutentha thupi, kupweteka mutu ndi kuzizira, choncho kuyezetsa msanga ndi kofunika.",
+      "tips_ny": [
+        "Gonani mu ukonde wa udzudzu woviikidwa mu mankhwala usiku uliwonse",
+        "Yezetsani malungo mukangoyamba kutentha thupi",
+        "Imwani mankhwala onse monga mwalembedwera"
+      ],
+      "see_doctor_if_ny": "Pitani kuchipatala tsiku lomwelo ngati mutentha thupi m'dera la malungo. Pitani kuchipatala nthawi yomweyo ngati mutopa kwambiri, musokonezeka maganizo, mukhala ndi khunyu mobwerezabwereza, mukavutika kupuma, mkodzo wakuda kapena wamagazi, maso kapena khungu lachikasu, kapena kutuluka magazi kosazolowereka. Ana osakwana zaka 5 ndi amayi oyembekezera ali pachiopsezo chachikulu.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C017",
+      "topic_ny": "Chifuwa chachikulu (TB)",
+      "condition_ny": "Matenda a bakiteriya omwe amakhudza kwambiri mapapo",
+      "keywords_ny": [
+        "TB",
+        "chifuwa chachikulu",
+        "chifuwa cha nthawi yaitali",
+        "kutuluka thukuta usiku",
+        "kukhosomola magazi"
+      ],
+      "content_ny": "TB ndi matenda a bakiteriya omwe amakhudza kwambiri mapapo ndipo amafalikira mumlengalenga munthu wodwala TB akakhosomola. Amachiritsidwa akamwa mankhwala onse mpaka kumaliza.",
+      "tips_ny": [
+        "Phimbani pakamwa mukakhosomola ndipo tsegulani mawindo kuti mpweya ulowe",
+        "Yezetsedwe ngati mwakhala ndi chifuwa kwa masabata awiri kapena kuposerapo",
+        "Imwani mankhwala a TB nthawi zonse mpaka mutamaliza"
+      ],
+      "see_doctor_if_ny": "Mukakhala ndi chifuwa chokhalitsa masabata awiri kapena kuposerapo, kukhosomola magazi, kutentha thupi, kutuluka thukuta usiku kapena kuonda, pitani kuchipatala kukayezedwa. Anthu odwala HIV ndi omwe amakhala nawo pafupi ndi wodwala TB ayeneranso kuyezedwa.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C018",
+      "topic_ny": "HIV",
+      "condition_ny": "Kachilombo kofooketsa chitetezo cha thupi",
+      "keywords_ny": [
+        "HIV",
+        "Edzi",
+        "kuyezetsa HIV",
+        "mankhwala a ARV",
+        "ART"
+      ],
+      "content_ny": "HIV ndi kachilombo kofooketsa chitetezo cha thupi. Kamafalikira kudzera m'kugonana popanda kondomu, magazi odwala, komanso kuchokera kwa mayi kupita kwa mwana, osati kudzera m'kukhala pamodzi kapena kugwirana. Ndi mankhwala a ARV (ART) anthu amatha kukhala moyo wautali ndi wathanzi.",
+      "tips_ny": [
+        "Yezetsedwe HIV kuchipatala",
+        "Gwiritsani ntchito kondomu moyenera nthawi zonse mukamagonana",
+        "Mukapezeka ndi HIV, yambani ART ndi kumwa tsiku lililonse; amayi oyembekezera ayezetsedwe kuti ateteze mwana wawo"
+      ],
+      "see_doctor_if_ny": "Mukaganiza kuti mwakumana ndi kachilomboka, pitani kuchipatala mwamsanga, makamaka mkati mwa maola 72, kukafunsa za mankhwala oteteza (PEP). Pitaninso kuchipatala ngati mukutentha thupi kosalekeza, kuonda, kapena kudwala mobwerezabwereza.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C019",
+      "topic_ny": "Kolera",
+      "condition_ny": "Matenda otsegula m'mimba kwambiri obwera chifukwa cha madzi kapena chakudya chodetsedwa",
+      "keywords_ny": [
+        "kolera",
+        "chimbudzi chonga madzi a mpunga",
+        "kutsegula m'mimba kwambiri",
+        "kutsegula m'mimba ndi kusanza",
+        "kuchepa madzi m'thupi"
+      ],
+      "content_ny": "Kolera ndi matenda obwera chifukwa cha chakudya kapena madzi odetsedwa. Angayambitse kutsegula m'mimba kwambiri kwa madzi ndipo angaphe pakadutsa maola ochepa ngati sachiritsidwa, koma ambiri amatha kuchiritsidwa ndi ORS.",
+      "tips_ny": [
+        "Imwani madzi abwino okha (owiritsa kapena oyeretsedwa)",
+        "Sambani m'manja ndi sopo mukatuluka kuchimbudzi ndi musanadye kapena kuphika",
+        "Yambani kumwa ORS nthawi yomweyo ndipo pitani kuchipatala"
+      ],
+      "see_doctor_if_ny": "Mukatsegula m'mimba kwambiri kwamadzi, kusanza mobwerezabwereza, kukokana kwa miyendo, ludzu lalikulu kapena maso olowa mkati, pitani kuchipatala nthawi yomweyo. Ndi zadzidzidzi, makamaka kwa ana.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C020",
+      "topic_ny": "Typhoid",
+      "condition_ny": "Matenda a bakiteriya obwera chifukwa cha chakudya ndi madzi odetsedwa",
+      "keywords_ny": [
+        "typhoid",
+        "matayifodi",
+        "kutentha thupi kwa masiku ambiri",
+        "kupweteka m'mimba ndi kutentha thupi",
+        "salmonella"
+      ],
+      "content_ny": "Typhoid ndi matenda a bakiteriya omwe amafalikira kudzera m'chakudya ndi madzi odetsedwa. Amayambitsa kutentha thupi kwa masiku angapo, kupweteka mutu ndi m'mimba, ndipo amachiritsidwa ndi maantibayotiki.",
+      "tips_ny": [
+        "Imwani madzi abwino ndipo idyani chakudya chophikidwa bwino komanso chatsopano",
+        "Sambani m'manja ndi sopo musanadye ndi mukatuluka kuchimbudzi",
+        "Imwani maantibayotiki monga mwalembedwera ndipo katemera akulangizidwa pomwe alipo"
+      ],
+      "see_doctor_if_ny": "Mukatentha thupi masiku angapo ndi kupweteka m'mimba, kudzimbidwa kapena kutsegula m'mimba, pitani kuchipatala. Pitani nthawi yomweyo ngati mwasokonezeka maganizo, mukamva kupweteka kwambiri m'mimba kapena chimbudzi chamagazi.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C021",
+      "topic_ny": "Bilharzia",
+      "condition_ny": "Matenda a tizilombo obwera chifukwa cha madzi a m'nyanja kapena mitsinje",
+      "keywords_ny": [
+        "bilharzia",
+        "magazi mu mkodzo",
+        "magazi mu chimbudzi",
+        "madzi a m'nyanja",
+        "nkhono za m'madzi"
+      ],
+      "content_ny": "Bilharzia imatengedwa m'madzi a m'nyanja, mitsinje ndi m'madambo okhala ndi nkhono zodwala. Chizindikiro chofala ndi magazi mu mkodzo kapena mu chimbudzi.",
+      "tips_ny": [
+        "Pewani kusambira, kuchapa kapena kuyenda m'madzi omwe angakhale ndi bilharzia",
+        "Imwani mankhwala (praziquantel) akaperekedwa ndi chipatala kapena sukulu",
+        "Gwiritsani madzi abwino posamba ndi kuchapa"
+      ],
+      "see_doctor_if_ny": "Mukapeza magazi mu mkodzo kapena mu chimbudzi, kupweteka m'mimba, kapena zizindikiro zosachoka mutakhudza madzi a m'nyanja kapena mitsinje m'dera lomwe muli bilharzia, pitani kuchipatala.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C022",
+      "topic_ny": "Chibayo",
+      "condition_ny": "Matenda a m'mapapo",
+      "keywords_ny": [
+        "chibayo",
+        "kupuma mofulumira",
+        "kupuma movutikira",
+        "matenda a pachifuwa",
+        "mwana akukhosomola ndi kutentha thupi"
+      ],
+      "content_ny": "Chibayo ndi matenda a m'mapapo ndipo ndi chimodzi mwa zifukwa zazikulu zomwe ana osakwana zaka 5 amafera. Chimayambitsa chifuwa, kutentha thupi ndi kupuma mofulumira kapena movutikira, ndipo chimachiritsidwa ndi maantibayotiki.",
+      "tips_ny": [
+        "Imwani maantibayotiki onse monga mwalembedwera",
+        "Yamwitsani makanda mkaka wa m'mawere wokha kwa miyezi 6 ndipo onetsetsani kuti ana apeza katemera wonse",
+        "Sungani ana kutali ndi utsi wa kuphika ndi wa fodya"
+      ],
+      "see_doctor_if_ny": "Mwana kapena wamkulu akapuma mofulumira kapena movutikira, chifuwa chikalowa mkati popuma, milomo ikasanduka yabuluu, kulephera kumwa, kapena kugona kwambiri, pitani kuchipatala nthawi yomweyo. Ndi zadzidzidzi.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C023",
+      "topic_ny": "Chikuku",
+      "condition_ny": "Matenda a kachilombo opatsirana mosavuta okhala ndi totupa",
+      "keywords_ny": [
+        "chikuku",
+        "totupa ndi kutentha thupi",
+        "maso ofiira",
+        "katemera wa chikuku",
+        "totupa kwa mwana"
+      ],
+      "content_ny": "Chikuku ndi matenda a kachilombo opatsirana mosavuta omwe amayambitsa kutentha thupi, totupa, chifuwa, mphuno yothamanga ndi maso ofiira. Akhoza kukhala oopsa kwa ana aang'ono ndipo amapewedwa ndi katemera.",
+      "tips_ny": [
+        "Patsani ana katemera wa chikuku pa nthawi yake",
+        "Sungani mwana wodwala panyumba ndipo mumupatse madzi ambiri",
+        "Patsani vitamini A pokhapokha ngati wogwira ntchito yazaumoyo wanena"
+      ],
+      "see_doctor_if_ny": "Mwana akavutika kupuma, kukhala ndi khunyu, madzi otuluka m'khutu, kapena zizindikiro zakuchepa madzi m'thupi, pitani kuchipatala. Pitani kuchipatala mukangoganiza kuti ndi chikuku.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C024",
+      "topic_ny": "COVID-19",
+      "condition_ny": "Matenda opuma obwera chifukwa cha kachilombo ka corona",
+      "keywords_ny": [
+        "COVID",
+        "COVID-19",
+        "corona",
+        "kutaya kununkhiza",
+        "katemera wa COVID"
+      ],
+      "content_ny": "COVID-19 ndi matenda opuma omwe amakhala ofatsa mpaka oopsa. Anthu ambiri amachira panyumba, koma ena ali pachiopsezo chodwala kwambiri.",
+      "tips_ny": [
+        "Khalani panyumba ndi kupumula mukadwala, ndipo tsegulani mawindo kuti mpweya ulowe",
+        "Sambani m'manja pafupipafupi ndipo valani chophimba kumaso pamalo odzaza anthu mukudwala",
+        "Patsani katemera wolangizidwa pa nthawi yake"
+      ],
+      "see_doctor_if_ny": "Mukavutika kupuma, kupweteka pachifuwa kosalekeza, kusokonezeka maganizo, milomo yabuluu, kapena ngati muli pachiopsezo chachikulu ndipo mukuipiraipira, pitani kuchipatala.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C025",
+      "topic_ny": "Hepatitis B",
+      "condition_ny": "Matenda a kachilombo a chiwindi",
+      "keywords_ny": [
+        "hepatitis B",
+        "chiwindi",
+        "matenda a chiwindi",
+        "maso achikasu",
+        "jaundice"
+      ],
+      "content_ny": "Hepatitis B ndi matenda a kachilombo a chiwindi omwe amafalikira kudzera m'magazi, kugonana komanso kuchokera kwa mayi kupita kwa mwana. Amapewedwa ndi katemera wotetezeka komanso wogwira ntchito.",
+      "tips_ny": [
+        "Pezani katemera, ndipo onetsetsani kuti makanda apeza katemera wa hepatitis B",
+        "Musagawane singano, malezala kapena mabulashi a mano",
+        "Gwiritsani kondomu ndipo yezetsedwe ngati munakumana ndi kachilomboka"
+      ],
+      "see_doctor_if_ny": "Mukakhala ndi khungu kapena maso achikasu, mkodzo wakuda, kutopa kwambiri, kupweteka m'mimba kapena kusanza kosalekeza, pitani kuchipatala. Amayi oyembekezera ayezetsedwe kuti mwana atetezedwe.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C026",
+      "topic_ny": "Kuthamanga kwa magazi",
+      "condition_ny": "Kuthamanga kwa magazi kwakukulu (hypertension)",
+      "keywords_ny": [
+        "kuthamanga kwa magazi",
+        "BP",
+        "hypertension",
+        "kuyezetsa magazi",
+        "sitiroko"
+      ],
+      "content_ny": "Kuthamanga kwa magazi nthawi zambiri sikuonetsa zizindikiro, koma kumawonjezera chiopsezo cha matenda a mtima, sitiroko ndi impso. Kuyezetsa pafupipafupi ndi chithandizo zimapewa mavuto.",
+      "tips_ny": [
+        "Muyezetse kuthamanga kwa magazi pafupipafupi",
+        "Muchepetse mchere, chitani masewera olimbitsa thupi, musasute fodya ndipo muchepetse mowa",
+        "Imwani mankhwala tsiku lililonse ndipo musasiye popanda uphungu"
+      ],
+      "see_doctor_if_ny": "Mukakhala ndi mutu waukulu ndi kusokonezeka maganizo, kupweteka pachifuwa, mavuto a maso, kapena kufooka kapena kusamva mbali imodzi ya thupi, pitani kuchipatala nthawi yomweyo. Ndi zadzidzidzi.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C027",
+      "topic_ny": "Matenda a shuga",
+      "condition_ny": "Matenda a nthawi yaitali a shuga wambiri m'magazi",
+      "keywords_ny": [
+        "matenda a shuga",
+        "shuga",
+        "ludzu lalikulu",
+        "kukodza kwambiri",
+        "diabetes"
+      ],
+      "content_ny": "Matenda a shuga ndi matenda a nthawi yaitali omwe shuga m'magazi amakhala wambiri kwambiri. Zizindikiro zodziwika ndi ludzu lalikulu, kukodza pafupipafupi, kutopa, kuonda ndi mabala ochedwa kupola. Pakapita nthawi angawononge maso, impso, mtima ndi mapazi.",
+      "tips_ny": [
+        "Idyani zakudya zoyenera ndipo pewani zakumwa zotsekemera",
+        "Chitani masewera olimbitsa thupi ndipo yang'anani mapazi anu tsiku ndi tsiku",
+        "Imwani mankhwala kapena jakisoni wa insulin monga mwalembedwera"
+      ],
+      "see_doctor_if_ny": "Mukakhala ndi zizindikiro za matenda a shuga ndipo simunayezedwe, pitani kuchipatala. Pitani nthawi yomweyo ngati mukusanza, kugona kwambiri, kusokonezeka maganizo, kupuma mofulumira kapena mpweya wonunkha ngati zipatso.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C028",
+      "topic_ny": "Mphumu",
+      "condition_ny": "Matenda a nthawi yaitali a mpweya",
+      "keywords_ny": [
+        "mphumu",
+        "kupuma kolira",
+        "chifuwa cholimba",
+        "inhaler",
+        "asthma"
+      ],
+      "content_ny": "Mphumu ndi matenda a nthawi yaitali a m'mapapo omwe amayambitsa kupuma kolira, chifuwa ndi kuvutika kupuma. Amatha kulamulidwa ndi chithandizo choyenera ndi kupewa zoyambitsa.",
+      "tips_ny": [
+        "Gwiritsani inhaler yanu yopulumutsa ndi yoteteza monga mwalembedwera",
+        "Pewani zoyambitsa monga utsi, fumbi ndi fungo lamphamvu",
+        "Tsatirani ndondomeko ya mphumu yomwe wogwira ntchito yazaumoyo wakupatsani"
+      ],
+      "see_doctor_if_ny": "Mukavutika kupuma kwambiri, kulephera kulankhula ziganizo zonse, inhaler yanu yopulumutsa sikugwira ntchito, kapena milomo ikasanduka yabuluu, pitani kuchipatala nthawi yomweyo. Ndi zadzidzidzi.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C029",
+      "topic_ny": "Kuchepa kwa magazi",
+      "condition_ny": "Maselo ofiira a magazi ochepa",
+      "keywords_ny": [
+        "kuchepa kwa magazi",
+        "anaemia",
+        "khungu lotuwa",
+        "kutopa msanga",
+        "chizungulire"
+      ],
+      "content_ny": "Kuchepa kwa magazi kumatanthauza kuti magazi akunyamula mpweya wochepa. Zifukwa zofala ndi kusowa chitsulo, malungo ndi mphutsi. Kumayambitsa kutopa, khungu lotuwa ndi kupuma movutikira.",
+      "tips_ny": [
+        "Idyani zakudya zokhala ndi chitsulo monga nyemba, masamba obiriwira, nyama ndi nsomba, pamodzi ndi zipatso zokhala ndi vitamini C",
+        "Imwani mapiritsi a chitsulo ndi folic acid ngati wogwira ntchito yazaumoyo wakupatsani, mwachitsanzo pa nthawi ya mimba",
+        "Pewani ndi kuchiza malungo ndi mphutsi"
+      ],
+      "see_doctor_if_ny": "Mukatopa kwambiri, kuoneka wotuwa, kupuma movutikira kapena chizungulire, pitani kuchipatala. Pitani nthawi yomweyo ngati mukumva kupweteka pachifuwa, kukomoka kapena kupuma movutikira kwambiri.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C030",
+      "topic_ny": "Khunyu",
+      "condition_ny": "Kukomoka mobwerezabwereza (khunyu)",
+      "keywords_ny": [
+        "khunyu",
+        "kugwa ndi kunjenjemera",
+        "kukomoka",
+        "kukokana thupi lonse",
+        "epilepsy"
+      ],
+      "content_ny": "Khunyu ndi matenda omwe amayambitsa kukomoka mobwerezabwereza. Anthu ambiri amatha kulamulira khunyu ndi mankhwala omwe amamwa nthawi zonse. Kudziwa chithandizo cha pakhunyu kumasunga munthuyo otetezeka.",
+      "tips_ny": [
+        "Khalani ndi munthuyo, werengani nthawi ya khunyu ndipo thandizani mutu wake",
+        "Chotsani zinthu zolimba ndi kumasula zovala zomuletsa; musaike kalikonse mkamwa mwake kapena kumugwira mwamphamvu",
+        "Khunyu likatha, mutembenuzireni mofatsa kumbali"
+      ],
+      "see_doctor_if_ny": "Ndi khunyu loyamba, likatha mphindi zoposa 5, likabwerabwera popanda kudzuka, munthuyo wavulala, ali ndi pakati kapena akuvutika kupuma pambuyo pake, pitani nawo kuchipatala nthawi yomweyo.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C031",
+      "topic_ny": "Kudulidwa ndi kuchekeka pakhungu",
+      "condition_ny": "Mabala ang'onoang'ono",
+      "keywords_ny": [
+        "kudulidwa",
+        "bala",
+        "kuchekeka",
+        "kutuluka magazi",
+        "kukwapuka"
+      ],
+      "content_ny": "Mabala ambiri ang'onoang'ono amatha kuchiritsidwa panyumba poletsa magazi ndi kusunga bala loyera.",
+      "tips_ny": [
+        "Sambani m'manja, kenako tsukani bala ndi madzi oyera oyenda",
+        "Kanikizani mwamphamvu ndi nsalu yoyera kuti magazi aleke",
+        "Phimbani ndi bandeji yoyera ndipo sungani bala louma ndi loyera"
+      ],
+      "see_doctor_if_ny": "Bala likakhala lakuya, magazi akapanda kuleka pakatha mphindi 10 mukukanikiza, dothi litalowa, ndi lolumidwa ndi nyama kapena munthu, kapena likasonyeza zizindikiro za matenda monga kufalikira kufiira, mafinya kapena kutentha thupi, pitani kuchipatala. Funsani za katemera wa tetanasi.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C032",
+      "topic_ny": "Kupsa ndi moto kapena madzi otentha",
+      "condition_ny": "Kuvulala ndi kutentha",
+      "keywords_ny": [
+        "kupsa",
+        "moto",
+        "madzi otentha",
+        "matuza",
+        "kupsa ndi moto"
+      ],
+      "content_ny": "Muzizire malo opsa mwamsanga kuti muchepetse kuwonongeka ndi ululu. Mabala ambiri opsa pang'ono amatha kuchiritsidwa panyumba, koma ochuluka kapena ozama amafunika chithandizo chachipatala.",
+      "tips_ny": [
+        "Tsukani malo opsa ndi madzi ozizira (osati a ayezi) oyenda kwa mphindi 20",
+        "Chotsani zodzikongoletsera ndi zovala pafupi ndi malo opsa, pokhapokha zitamatirira pakhungu",
+        "Phimbani mofewa ndi pulasitiki woyera wophimbira chakudya kapena nsalu yoyera; musapake ayezi, batala kapena mankhwala a mano"
+      ],
+      "see_doctor_if_ny": "Malo opsa akakhala aakulu kuposa dzanja la munthu, akuya, otuluka matuza, kapena pankhope, m'manja, m'mapazi kapena pa ziwalo zobisika, pitani kuchipatala. Pitaninso nthawi iliyonse ya kupsa ndi mankhwala kapena magetsi, komanso kupsa kulikonse kwa ana aang'ono.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C033",
+      "topic_ny": "Kutuluka magazi m'mphuno",
+      "condition_ny": "Magazi otuluka m'mphuno",
+      "keywords_ny": [
+        "kutuluka magazi m'mphuno",
+        "magazi m'mphuno",
+        "mphuno ikutuluka magazi",
+        "magazi otuluka m'mphuno",
+        "mphuno"
+      ],
+      "content_ny": "Kutuluka magazi m'mphuno kochuluka sikuopsa ndipo kumasiya pakadutsa mphindi 10 mpaka 15 ngati mukukanikiza moyenera.",
+      "tips_ny": [
+        "Khalani chilili ndi kuwerama kutsogolo; musatambasulire mutu kumbuyo",
+        "Kanikizani mbali yofewa ya mphuno mwamphamvu kwa mphindi 10 mpaka 15",
+        "Pumani pakamwa ndipo mulavule magazi aliwonse"
+      ],
+      "see_doctor_if_ny": "Magazi akapitirira kutuluka kupitirira mphindi 20, akatuluka ambiri, atatha kuvulala pamutu, kapena mukamva chizungulire kapena kufooka, pitani kuchipatala.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C034",
+      "topic_ny": "Kutsamwa (wamkulu)",
+      "condition_ny": "Chakudya kapena chinthu chotseka mpweya",
+      "keywords_ny": [
+        "kutsamwa",
+        "sindingapume",
+        "chakudya chakakamira",
+        "kutsekeka mpweya",
+        "kukanika kupuma"
+      ],
+      "content_ny": "Kutsamwa kumachitika chinthu chikatseka njira ya mpweya. Munthuyo akatha kukhosomola, mulimbikitseni. Ngati sangathe kulankhula, kukhosomola kapena kupuma, chitanipo nthawi yomweyo. Makanda ndi ana aang'ono amafuna njira ina, choncho phunzirani chithandizo choyamba.",
+      "tips_ny": [
+        "Mulimbikitseni munthuyo kupitiriza kukhosomola",
+        "Ngati sangakhosomole, mumenyeni mwamphamvu kumsana pakati pa mapewa mpaka ka 5",
+        "Ngati sizikuthandiza, mukanikizeni m'mimba mmwamba mpaka ka 5 (manja ogwirizana pamwamba pa mchombo)"
+      ],
+      "see_doctor_if_ny": "Chinthucho chikapanda kutuluka, itanani thandizo ladzidzidzi nthawi yomweyo ndipo pitirizani kubwereza. Aliyense amene wakanikizidwa m'mimba ayenera kuyang'aniridwa ndi wogwira ntchito yazaumoyo.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C035",
+      "topic_ny": "Kupindika kwa mfundo ndi kuvulala kwa minofu",
+      "condition_ny": "Kuvulala kwa minyewa kapena minofu",
+      "keywords_ny": [
+        "kupindika kwa mfundo",
+        "kuvulala kwa minofu",
+        "kutsimphina",
+        "kutupa mfundo",
+        "kuvulala"
+      ],
+      "content_ny": "Kupindika kwa mfundo ndi kuvulala kwa minofu nthawi zambiri kumachira ndi kupumula ndi chisamaliro chosavuta pakadutsa masiku mpaka masabata.",
+      "tips_ny": [
+        "Mupumule ndipo musapondereze malo ovulala",
+        "Ikani ayezi wokulungidwa munsalu kwa mphindi 20 pa maola 2 mpaka 3 aliwonse",
+        "Mangani mofewa ndi nsalu ndipo kwezani mwendo kapena dzanja pokhala"
+      ],
+      "see_doctor_if_ny": "Mukalephera kuponda, kupweteka kwambiri, kusamva, kuoneka kosiyana kapena kutupa kwambiri, kapena zosachira pakadutsa masiku angapo, pitani kuchipatala.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C036",
+      "topic_ny": "Kukomoka",
+      "condition_ny": "Kutaya chidziwitso kwa kanthawi",
+      "keywords_ny": [
+        "kukomoka",
+        "chizungulire",
+        "kugwa pansi",
+        "kutaya chidziwitso",
+        "kukomoka mwadzidzidzi"
+      ],
+      "content_ny": "Kukomoka ndi kutaya chidziwitso kwa kanthawi, nthawi zambiri chifukwa cha magazi ochepa kupita mu ubongo. Anthu ambiri amachira mwamsanga.",
+      "tips_ny": [
+        "Gonekani munthuyo chagada ndi kukweza miyendo yake",
+        "Masulani zovala zolimba ndipo onetsetsani kuti akupeza mpweya wabwino",
+        "Akachira, mukhazikeni pang'onopang'ono ndi kumupatsa madzi"
+      ],
+      "see_doctor_if_ny": "Akapanda kuchira pakatha mphindi imodzi kapena ziwiri, wavulala, akumva kupweteka pachifuwa kapena mtima ukuthamanga, ali ndi pakati, kapena ndi nthawi yoyamba kukomoka, pitani naye kuchipatala.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C037",
+      "topic_ny": "Kulumidwa ndi njoka",
+      "condition_ny": "Kulumidwa ndi njoka yaululu",
+      "keywords_ny": [
+        "kulumidwa ndi njoka",
+        "njoka",
+        "ululu wa njoka",
+        "mankhwala a ululu wa njoka",
+        "njoka yandiluma"
+      ],
+      "content_ny": "Kulumidwa ndi njoka kungaphe, koma chithandizo chachangu kuchipatala chimapulumutsa miyoyo. Mankhwala a ululu wa njoka (antivenom) amaperekedwa ndi ogwira ntchito yazaumoyo okha.",
+      "tips_ny": [
+        "Mutonthoze munthuyo ndipo asasunthe, makamaka mwendo kapena dzanja lolumidwa",
+        "Chotsani mphete ndi zinthu zolimba pafupi ndi pomwe walumidwa",
+        "Pitani kuchipatala mwamsanga; musadule, kuyamwa, kumanga mwamphamvu kapena kupaka mankhwala a chikhalidwe pa bala"
+      ],
+      "see_doctor_if_ny": "Kulumidwa ndi njoka kulikonse ndi kwadzidzidzi. Pitani kuchipatala nthawi yomweyo, makamaka ngati pali kutupa, kupweteka, kutuluka magazi, kugona kwambiri kapena kupuma movutikira.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C038",
+      "topic_ny": "Kuvutika ndi kutentha kwambiri",
+      "condition_ny": "Thupi kutentha kwambiri",
+      "keywords_ny": [
+        "kutentha kwambiri",
+        "heatstroke",
+        "kuvutika ndi dzuwa",
+        "thupi likutentha kwambiri",
+        "kutopa ndi kutentha"
+      ],
+      "content_ny": "Kutentha kwambiri kungayambitse thukuta lambiri, kupweteka mutu, chizungulire ndi kufooka. Ngati sikuchiritsidwa kungasanduke heatstroke, yomwe ndi ngozi yadzidzidzi.",
+      "tips_ny": [
+        "Sunthirani pamalo ozizira a mthunzi ndi kugona pansi",
+        "Chotsani zovala zochuluka ndi kumwa madzi ozizira pang'onopang'ono",
+        "Zizirani khungu ndi nsalu yonyowa kapena mpepo"
+      ],
+      "see_doctor_if_ny": "Munthuyo akapanda kuchira pakatha mphindi 30, ali ndi kutentha thupi kwambiri, kusokonezeka maganizo, khunyu kapena kukomoka, pitani naye kuchipatala nthawi yomweyo.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C039",
+      "topic_ny": "Poizoni",
+      "condition_ny": "Kumeza kapena kukhudza chinthu choopsa",
+      "keywords_ny": [
+        "poizoni",
+        "kumwa poizoni",
+        "mankhwala a mbewu",
+        "palafini",
+        "mankhwala oopsa"
+      ],
+      "content_ny": "Poizoni angachokere ku mankhwala, mankhwala apakhomo, mankhwala opha tizilombo a m'minda ndi zomera zina. Ana ali pachiopsezo chachikulu. Kuchita mwamsanga n'kofunika.",
+      "tips_ny": [
+        "Chotsani munthuyo pafupi ndi chomwe chamuvulaza ndipo musamusanzitse",
+        "Sungani botolo kapena lemba kuti muwonetse ogwira ntchito yazaumoyo",
+        "Sungani mankhwala, mankhwala a m'minda ndi palafini kutali ndi ana"
+      ],
+      "see_doctor_if_ny": "Poizoni wokayikitsa nthawi zonse ndi wadzidzidzi. Pitani kuchipatala nthawi yomweyo, makamaka akagona kwambiri, kupuma movutikira kapena khunyu.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C040",
+      "topic_ny": "Fupa lothyoka",
+      "condition_ny": "Fupa lothyoka kapena kuphwanyika",
+      "keywords_ny": [
+        "fupa lothyoka",
+        "kuthyoka fupa",
+        "fupa lathyoka",
+        "dzanja lathyoka",
+        "mwendo wathyoka"
+      ],
+      "content_ny": "Fupa lothyoka limayambitsa kupweteka, kutupa komanso nthawi zina mawonekedwe osiyana. Limafunika kuyezedwa kuchipatala nthawi zambiri ndi X-ray.",
+      "tips_ny": [
+        "Sungani malo ovulala osasuntha ndipo muwathandize ndi nsalu kapena mkanda wa dzanja",
+        "Musayese kuwongola fupalo ndipo musalipondereze",
+        "Ikani ayezi wokulungidwa munsalu ndipo muletse magazi ndi kukanikiza koyera"
+      ],
+      "see_doctor_if_ny": "Mukaganiza kuti fupa lathyoka, pitani kuchipatala mwamsanga, makamaka ngati pali bala, kupweteka kwambiri, kuoneka kosiyana, kusamva, kapena dzanja kapena mwendo ukakhala wozizira kapena wotuwa.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C041",
+      "topic_ny": "Zizindikiro zoopsa za mimba",
+      "condition_ny": "Zizindikiro zochenjeza pa nthawi ya mimba",
+      "keywords_ny": [
+        "mimba",
+        "oyembekezera",
+        "zizindikiro zoopsa za mimba",
+        "kutuluka magazi pa mimba",
+        "chipatala cha amayi oyembekezera"
+      ],
+      "content_ny": "Kupita ku chipatala nthawi zonse pa nthawi ya mimba kumasunga mayi ndi mwana athanzi. Zizindikiro zina pa nthawi ya mimba zimaonetsa vuto lalikulu ndipo zimafunika chithandizo chachangu.",
+      "tips_ny": [
+        "Pitani ku chipatala pa nthawi yonse yoyembekezera ndipo konzekerani kubadwira kuchipatala ndi wothandizira waluso",
+        "Imwani mapiritsi a chitsulo ndi folic acid monga mwauzidwa ndipo gonani mu ukonde wa udzudzu",
+        "Idyani zakudya zosiyanasiyana ndipo pewani mowa ndi fodya"
+      ],
+      "see_doctor_if_ny": "Pitani nthawi yomweyo mukatuluka magazi, mutu waukulu, kuona kosaoneka bwino, kutupa nkhope kapena manja, khunyu, kutentha thupi kwambiri, kupweteka kwambiri m'mimba, kupuma movutikira, kutuluka madzi, kapena mwana kusasuntha kapena kusuntha pang'ono.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C042",
+      "topic_ny": "Kuyamwitsa",
+      "condition_ny": "Kudyetsa mwana mkaka wa m'mawere",
+      "keywords_ny": [
+        "kuyamwitsa",
+        "mkaka wa m'mawere",
+        "kuyamwitsa mwana wakhanda",
+        "kudyetsa mwana",
+        "kuyamwa"
+      ],
+      "content_ny": "Mkaka wa m'mawere ndiye chakudya chabwino kwambiri cha makanda. WHO imalangiza kuyamba kuyamwitsa pakatha ola limodzi mwana atabadwa, kuyamwitsa mkaka wokha kwa miyezi 6 yoyamba, kenako kupitiriza ndi zakudya zina zotetezeka mpaka zaka ziwiri kapena kuposerapo.",
+      "tips_ny": [
+        "Yambani kuyamwitsa pakatha ola limodzi mwana atabadwa",
+        "Yamwitsani mwana akafuna usana ndi usiku ndipo onetsetsani kuti akugwira bwino bere",
+        "Kuyambira miyezi 6 onjezerani zakudya zotetezeka komanso zopatsa thanzi pamene mukupitiriza kuyamwitsa"
+      ],
+      "see_doctor_if_ny": "Mwana akapanda kuyamwa bwino, kuchepa kukodza, kunenepa pang'ono, kapena mayi akamva kupweteka kwa bere ndi chotupa chofiira kapena kutentha thupi, pitani kuchipatala. Amayi omwe ali ndi HIV atsatire uphungu wa wogwira ntchito yazaumoyo.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C043",
+      "topic_ny": "Katemera wa ana",
+      "condition_ny": "Katemera woteteza ana",
+      "keywords_ny": [
+        "katemera",
+        "katemera wa ana",
+        "katemera wa mwana",
+        "khadi la katemera",
+        "chipatala cha ana"
+      ],
+      "content_ny": "Katemera wa ana wanthawi zonse amateteza ku matenda oopsa monga chikuku, ziwalo (polio), TB, chibayo, chifuwa cha kokoka (whooping cough), tetanasi ndi hepatitis B.",
+      "tips_ny": [
+        "Tsatirani ndondomeko ya katemera ya dziko ndipo sungani khadi la mwana bwino",
+        "Patsani katemera pa nthawi yake; matenda ofatsa nthawi zambiri si chifukwa chochedwetsera",
+        "Kutentha thupi pang'ono kapena kupweteka pa malo opangira jakisoni ndi zofala ndipo zimatha msanga"
+      ],
+      "see_doctor_if_ny": "Mwana walephera katemera (funsani za kuthamangitsa), kapena atalandira katemera ali ndi kutentha thupi kwambiri, khunyu, kupuma movutikira kapena kutupa nkhope, pitani kuchipatala.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C044",
+      "topic_ny": "Kuchepa madzi m'thupi kwa ana",
+      "condition_ny": "Kutaya madzi ambiri m'thupi",
+      "keywords_ny": [
+        "kuchepa madzi m'thupi",
+        "mwana akutsegula m'mimba",
+        "ORS",
+        "madzi a shuga ndi mchere",
+        "khanda likutsegula m'mimba"
+      ],
+      "content_ny": "Ana amataya madzi mwamsanga akamatsegula m'mimba ndi kusanza. ORS ndi kupitiriza kudyetsa zimapewa kuchepa madzi m'thupi, ndipo zinc yoperekedwa monga wogwira ntchito yazaumoyo walangiza imafupikitsa kutsegula m'mimba.",
+      "tips_ny": [
+        "Patsani ORS pang'ono pang'ono ndipo yamwitsani kawirikawiri",
+        "Pitirizani kudyetsa mwana monga mwa nthawi zonse",
+        "Patsani zinc pokhapokha wogwira ntchito yazaumoyo walangiza"
+      ],
+      "see_doctor_if_ny": "Mwana ali ndi maso olowa mkati, wopanda misozi, pakamwa pouma, wakodza pang'ono kapena wosakodza, wagona kwambiri kapena walefuka, sangathe kumwa, kapena ali ndi magazi mu chimbudzi, pitani kuchipatala nthawi yomweyo.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C045",
+      "topic_ny": "Kusamalira mwana wakhanda",
+      "condition_ny": "Kusamalira mwana m'masabata oyamba",
+      "keywords_ny": [
+        "mwana wakhanda",
+        "khanda",
+        "chingwe cha mchombo",
+        "kusamalira khanda",
+        "kukumbatira khungu ndi khungu"
+      ],
+      "content_ny": "Masiku 28 oyamba ndi nthawi yosatetezeka kwambiri pa moyo wa mwana. Kutentha, chisamaliro choyera ndi kuyamwitsa msanga zimasunga makanda athanzi.",
+      "tips_ny": [
+        "Sungani mwana wofunda mwa kumukumbatira khungu ndi khungu",
+        "Sungani chingwe cha mchombo choyera ndi chouma",
+        "Yamwitsani msanga komanso kawirikawiri, ndipo sambani m'manja musanakhudze mwana"
+      ],
+      "see_doctor_if_ny": "Mwana akapanda kuyamwa, ali ndi kutentha thupi kapena akuzizira kwambiri, akupuma mofulumira, ali ndi khungu kapena maso achikasu, mchombo wofiira kapena wotuluka mafinya, khunyu, kapena ndi walefuka, pitani kuchipatala nthawi yomweyo.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C046",
+      "topic_ny": "Kudya zakudya zabwino",
+      "condition_ny": "Zakudya zoyenera za thanzi labwino",
+      "keywords_ny": [
+        "zakudya zabwino",
+        "zakudya zoyenera",
+        "kadyedwe",
+        "ndiwo zamasamba",
+        "mchere ndi shuga"
+      ],
+      "content_ny": "Zakudya zabwino zimaphatikizapo zipatso, ndiwo zamasamba, nyemba, mtedza ndi mbewu zosakonzedwa, ndipo zimachepetsa mchere, shuga ndi mafuta oipa.",
+      "tips_ny": [
+        "Idyani zakudya zosiyanasiyana, kuphatikizapo zipatso ndi ndiwo zamasamba zosachepera 5 patsiku",
+        "Muchepetse mchere ndi shuga ndipo imwani madzi m'malo mwa zakumwa zotsekemera",
+        "Sankhani njira zophikira zomwe zimagwiritsa ntchito mafuta ochepa ndipo pewani zakudya zokazinga zambiri"
+      ],
+      "see_doctor_if_ny": "Mukuonda popanda chifukwa, mwasiya kufuna kudya kwa nthawi yaitali, kapena mukuvutika kupeza chakudya chokwanira, lankhulani ndi wogwira ntchito yazaumoyo kapena ntchito yazakudya.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C047",
+      "topic_ny": "Kuperewera kwa zakudya m'thupi kwa ana",
+      "condition_ny": "Kusowa chakudya kapena zakudya zokwanira zakukula",
+      "keywords_ny": [
+        "kuperewera kwa zakudya",
+        "kuonda kwa mwana",
+        "kuchedwa kukula",
+        "kwashiorkor",
+        "mapazi otupa a mwana"
+      ],
+      "content_ny": "Kuperewera kwa zakudya kungaoneke ngati kuonda kwambiri, kukhala wamfupi kuposa msinkhu, kapena kutupa mapazi. Kudyetsa bwino, kuyeza kukula ndi kuchiza matenda msanga kumateteza ana.",
+      "tips_ny": [
+        "Yamwitsani mkaka wa m'mawere wokha kwa miyezi 6, kenako onjezerani zakudya zosiyanasiyana monga nyemba, mtedza, mazira, nsomba, zipatso ndi ndiwo zamasamba",
+        "Pitani ku chipatala kukayeza kukula kwa mwana",
+        "Chiritsani matenda monga kutsegula m'mimba ndi malungo mwamsanga"
+      ],
+      "see_doctor_if_ny": "Mwana akaonda kwambiri, mapazi atatupa, sakufuna kudya, kapena walefuka ndi wogona kwambiri, mutengereni kuchipatala, komwe angamupatse chakudya chapadera cha chithandizo.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C048",
+      "topic_ny": "Kusamba m'manja",
+      "condition_ny": "Ukhondo wa manja popewa matenda",
+      "keywords_ny": [
+        "kusamba m'manja",
+        "sopo",
+        "ukhondo wa manja",
+        "tizilombo",
+        "kusamba manja"
+      ],
+      "content_ny": "Kusamba m'manja ndi sopo ndi madzi oyera ndi imodzi mwa njira zogwira ntchito kwambiri zopewera kutsegula m'mimba, matenda opuma ndi matenda ena ambiri.",
+      "tips_ny": [
+        "Nyowetsani manja, pakani sopo ndipo kolani mbali zonse kwa masekondi osachepera 20",
+        "Sambani musanadye kapena kuphika, ndi mukatuluka kuchimbudzi kapena kusintha thewera",
+        "Sambani mutasamalira munthu wodwala"
+      ],
+      "see_doctor_if_ny": "Kusamba m'manja sikuchiza matenda. Pitani kwa wogwira ntchito yazaumoyo ngati inu kapena mwana mukutsegula m'mimba kosalekeza, kutentha thupi kapena matenda a pakhungu.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C049",
+      "topic_ny": "Madzi akumwa abwino",
+      "condition_ny": "Kuyeretsa madzi akumwa",
+      "keywords_ny": [
+        "madzi abwino",
+        "kuwiritsa madzi",
+        "kuyeretsa madzi",
+        "chlorine",
+        "madzi oyera"
+      ],
+      "content_ny": "Madzi odetsedwa amafalitsa matenda monga kolera, typhoid ndi kutsegula m'mimba. Kuwiritsa kapena kuyeretsa madzi kumawapangitsa kukhala abwino akumwa.",
+      "tips_ny": [
+        "Wiritsani madzi mpaka ayambe kuphulika kwa mphindi imodzi, kapena muwayeretse ndi chlorine monga mwalangizidwa",
+        "Sungani madzi oyeretsedwa mu chidebe choyera ndi chotsekedwa",
+        "Gwiritsani chikho choyera kapena supuni yaikulu yoyera potunga madzi"
+      ],
+      "see_doctor_if_ny": "Inu kapena mwana mukayamba kutsegula m'mimba, kusanza kapena zizindikiro za kuchepa madzi m'thupi mutamwa madzi osayeretsedwa, pitani kuchipatala.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    },
+    {
+      "entry_id": "C050",
+      "topic_ny": "Nkhawa ndi kupsinjika maganizo",
+      "condition_ny": "Kukhala ndi nkhawa, mantha kapena kulemedwa",
+      "keywords_ny": [
+        "nkhawa",
+        "kupsinjika maganizo",
+        "mantha",
+        "kuda nkhawa",
+        "kulemedwa"
+      ],
+      "content_ny": "Nkhawa ndi kupsinjika maganizo ndi zofala. Zizolowezi zosavuta zimathandiza, ndipo thandizo lilipo pamene nkhawa yayamba kusokoneza moyo wa tsiku ndi tsiku.",
+      "tips_ny": [
+        "Lankhulani ndi munthu amene mumamukhulupirira za momwe mukumvera",
+        "Chitani masewera olimbitsa thupi ndipo mugone mokwanira",
+        "Yesani kupuma pang'onopang'ono mozama ndipo muchepetse mowa"
+      ],
+      "see_doctor_if_ny": "Nkhawa ikakhala yosalekeza ndi yosokoneza moyo wanu, mukakhala ndi mantha owopsa kapena kusagona kwa masabata, kapena kumwa mowa kapena mankhwala osokoneza bongo kuti muthane nazo, pitani kwa wogwira ntchito yazaumoyo. Ngati muli ndi maganizo odzivulaza, funani thandizo nthawi yomweyo kwa wogwira ntchito yazaumoyo, thandizo ladzidzidzi kapena munthu wapafupi.",
+      "translation_status": "AI draft. Needs review by a fluent Chichewa speaker and a health worker before use."
+    }
+  ]
+}

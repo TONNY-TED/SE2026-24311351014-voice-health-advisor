@@ -61,6 +61,23 @@ class KbEntry {
     );
   }
 
+  // Build from a Chichewa JSON map (keys end in "_ny").
+  factory KbEntry.fromChichewaJson(Map<String, dynamic> json) {
+    List<String> strList(dynamic v) =>
+        (v as List? ?? []).map((e) => e.toString()).toList();
+    return KbEntry(
+      entryId: json['entry_id']?.toString() ?? '',
+      category: 'Chichewa',
+      topic: json['topic_ny']?.toString() ?? '',
+      condition: json['condition_ny']?.toString() ?? '',
+      keywords: strList(json['keywords_ny']).map((s) => s.toLowerCase()).toList(),
+      content: json['content_ny']?.toString() ?? '',
+      tips: strList(json['tips_ny']),
+      seeDoctorIf: json['see_doctor_if_ny']?.toString() ?? '',
+      source: 'Chichewa knowledge base (AI draft)',
+    );
+  }
+
   // Formatted answer shown in the advice box.
   String get formattedAdvice {
     // Keep it readable: content + first tips + see-doctor + source.
@@ -100,6 +117,16 @@ class KnowledgeBaseService {
     final list = data['entries'] as List? ?? [];
     return list
         .map((e) => KbEntry.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  // Load the 50-entry Chichewa knowledge base (C001-C050).
+  static Future<List<KbEntry>> loadChichewa() async {
+    final raw = await rootBundle.loadString('assets/knowledge_base_ny.json');
+    final data = jsonDecode(raw) as Map<String, dynamic>;
+    final list = data['entries'] as List? ?? [];
+    return list
+        .map((e) => KbEntry.fromChichewaJson(e as Map<String, dynamic>))
         .toList();
   }
 

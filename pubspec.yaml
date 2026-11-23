@@ -70,6 +70,8 @@ flutter:
   # VoiceHealth knowledge base JSON (24 entries).
   assets:
     - assets/knowledge_base.json
+    # Chichewa knowledge base (50 entries, C001-C050).
+    - assets/knowledge_base_ny.json
     - assets/health_sources.json
     # Login background image (place bg.png / bg.jpg / bg.jpeg here).
     - assets/bg.png

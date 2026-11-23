@@ -212,7 +212,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _loadKnowledgeBase() async {
     try {
       final entries = await KnowledgeBaseService.load();
-      if (mounted) setState(() => _kbEntries = entries);
+      // Also load the Chichewa knowledge base (C001-C050).
+      List<KbEntry> chichewa = const [];
+      try {
+        chichewa = await KnowledgeBaseService.loadChichewa();
+      } catch (_) {}
+      if (mounted) setState(() => _kbEntries = [...entries, ...chichewa]);
     } catch (_) {}
   }
 

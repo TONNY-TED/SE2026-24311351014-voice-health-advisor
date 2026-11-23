@@ -60,11 +60,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [primary, const Color(0xFF3B82F6), const Color(0xFF60A5FA)],
+        // Full-screen background image with a 30% dark blue overlay.
+        decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 0, 55, 175), // fallback if image missing
+          image: DecorationImage(
+            image: AssetImage('assets/bg.png'),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+              Color(0x4D002266),
+              BlendMode.darken,
+            ),
           ),
         ),
         child: SafeArea(

@@ -46,3 +46,7 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Large output files exceeding GitHub LFS limit (100MB)
+analysis_output.txt
+Project Overview pdf.pdf

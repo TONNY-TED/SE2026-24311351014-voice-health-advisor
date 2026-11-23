@@ -1,7 +1,7 @@
 // Settings Screen: font size, TTS toggle, app version, developer contact, and tutorial.
 // Persisted in SharedPreferences so choices survive restarts.
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../services/app_settings_service.dart';

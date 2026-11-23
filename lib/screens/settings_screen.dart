@@ -51,6 +51,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
+  Future<void> _launchDeveloperSite() async {
+    const String developerSiteUrl = 'https://prop-industries.vercel.app/';
+    final uri = Uri.parse(developerSiteUrl);
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not open developer site');
+    }
+  }
+
   // 3 intro slides (same ones used in onboarding).
   List<TutorialSlide> _tutorialSlides = [
     TutorialSlide(
@@ -170,6 +178,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onPressed: _launchWhatsApp,
               icon: const Icon(Icons.chat_outlined),
               label: const Text('WhatsApp developer'),
+            ),
+          ),
+          const SizedBox(height: 8),
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton.icon(
+              onPressed: _launchDeveloperSite,
+              icon: const Icon(Icons.open_in_new_outlined),
+              label: const Text('Meet the developer'),
             ),
           ),
           const SizedBox(height: 20),

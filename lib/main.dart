@@ -2,8 +2,9 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:material_ui/material_ui.dart';
 
-// Import Speech Recognition Module (Week 2: Voice Recognition)
-import 'package:healthcare_assistant/services/speech_service.dart';
+// Import Voice Recognition Module (Week 2: Voice Recognition)
+// The controller owns the microphone stream, silence detection and states.
+import 'package:healthcare_assistant/services/voice_input_controller.dart';
 import 'package:healthcare_assistant/services/tts_service.dart';
 
 // Import Authentication Module (register / login / saved profile)
@@ -19,6 +20,7 @@ import 'package:healthcare_assistant/screens/history_screen.dart';
 import 'package:healthcare_assistant/screens/profile_screen.dart';
 import 'package:healthcare_assistant/widgets/main_shell.dart';
 import 'package:healthcare_assistant/widgets/onboarding_tutorial.dart';
+import 'package:healthcare_assistant/widgets/voice_input_panel.dart';
 
 
 // Application entry point
@@ -179,10 +181,12 @@ class HomeScreen extends StatefulWidget {
 // Home Screen State: handles Week 2 voice flow
 class _HomeScreenState extends State<HomeScreen> {
   final AuthService _auth = AuthService();
-  final SpeechService _speechService = SpeechService();
   final TtsService _ttsService = TtsService();
 
-  bool isListening = false;
+  // Owns the recognizer, microphone levels and the idle/listening/
+  // processing/result/error state machine.
+  late final VoiceInputController _voice;
+
   String recognizedText = "No voice input yet";
   String healthAdvice = "Your health advice will appear here";
   final TextEditingController _textController = TextEditingController();
@@ -196,7 +200,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _initSpeech();
+    _voice = VoiceInputController(onFinalized: _handleVoiceFinalized);
+    _voice.addListener(_onVoiceChanged);
     _initTts();
     _loadProfile();
     _loadKnowledgeBase();
@@ -237,47 +242,59 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
+    _voice.removeListener(_onVoiceChanged);
+    _voice.dispose();
     _textController.dispose();
     _ttsService.stop();
     super.dispose();
   }
 
-  Future<void> _initSpeech() async {
-    await _speechService.initialize();
-  }
-
-  void _updateAdvice(String text) {
-    if (text.trim().isEmpty) {
-      _detectedLabel = '';
-      healthAdvice = "I did not hear anything. Please tap and speak again.";
-      _speakAdvice();
+  // Runs the existing clinical knowledge-base + NLP pipeline on a query.
+  // Only ever called with a final (complete) transcript or typed text.
+  void _analyzeQuery(String text) {
+    final String query = text.trim();
+    if (query.isEmpty) {
+      setState(() {
+        _detectedLabel = '';
+        recognizedText = "No voice input yet";
+        healthAdvice =
+            "I did not hear anything. Please tap and speak again.";
+      });
       return;
     }
 
     if (_kbEntries.isNotEmpty) {
-      final result = NlpService.parse(text, _kbEntries);
+      final result = NlpService.parse(query, _kbEntries);
       if (result.entry != null) {
-        _detectedLabel =
-            'Detected: ${result.topic} (${result.condition}) - ${result.intent.name} (${(result.confidence * 100).round()}%)';
-
         final body = result.entry!.formattedAdvice;
-        healthAdvice = result.isEmergency ? 'EMERGENCY:\n$body' : body;
-        _logHistory(text, result.topic, result.intent.name);
+        setState(() {
+          recognizedText = query;
+          _detectedLabel =
+              'Detected: ${result.topic} (${result.condition}) - ${result.intent.name} (${(result.confidence * 100).round()}%)';
+          healthAdvice = result.isEmergency ? 'EMERGENCY:\n$body' : body;
+        });
+        _logHistory(query, result.topic, result.intent.name);
         _speakAdvice();
         return;
       }
     }
 
-    final topic = HealthService.findForQuery(text);
+    final topic = HealthService.findForQuery(query);
 
     if (topic != null) {
-      _detectedLabel = 'Detected: ${topic.title} - wellness';
-      healthAdvice = '${topic.title}: ${topic.advice}';
-      _logHistory(text, topic.title, 'wellness');
+      setState(() {
+        recognizedText = query;
+        _detectedLabel = 'Detected: ${topic.title} - wellness';
+        healthAdvice = '${topic.title}: ${topic.advice}';
+      });
+      _logHistory(query, topic.title, 'wellness');
     } else {
-      _detectedLabel = '';
-      healthAdvice =
-          "No match found. Try: sleep, water, exercise, diet, stress, malaria, cold, fever or emergency.";
+      setState(() {
+        recognizedText = query;
+        _detectedLabel = '';
+        healthAdvice =
+            "No match found. Try: sleep, water, exercise, diet, stress, malaria, cold, fever or emergency.";
+      });
     }
     _speakAdvice();
   }
@@ -303,39 +320,64 @@ class _HomeScreenState extends State<HomeScreen> {
     } catch (_) {}
   }
 
-  void _submitTypedText() {
-    final typed = _textController.text;
-    setState(() {
-      recognizedText = typed.isEmpty ? "No voice input yet" : typed;
-      _updateAdvice(typed);
-    });
+  // Copied into the text field + recognised-text box while the user speaks.
+  void _onVoiceChanged() {
+    if (!mounted) return;
+    if (_voice.state == VoiceInputState.listening) {
+      final String text = _voice.transcript;
+      if (text.isEmpty) return;
+      if (_textController.text == text) return;
+      _textController.value = TextEditingValue(
+        text: text,
+        selection: TextSelection.collapsed(offset: text.length),
+      );
+      setState(() => recognizedText = text);
+    }
   }
 
-  void listen() async {
-    if (!isListening) {
-      bool available = await _speechService.initialize();
-      if (!available) {
-        setState(() {
-          recognizedText = "Microphone not available";
-          healthAdvice =
-              "Please allow microphone permission and check your connection.";
-        });
-        return;
-      }
-      setState(() => isListening = true);
-      await _speechService.startListening(
-        onText: (text) {
-          setState(() {
-            recognizedText =
-                text.isEmpty ? "Listening... please speak" : text;
-            _updateAdvice(text);
-          });
-        },
-      );
-    } else {
-      await _speechService.stop();
-      setState(() => isListening = false);
+  // Called by the controller once 3 s of silence has finalised the speech.
+  Future<void> _handleVoiceFinalized(String transcript) async {
+    final String query = transcript.trim();
+    _textController.value = TextEditingValue(
+      text: query,
+      selection: TextSelection.collapsed(offset: query.length),
+    );
+    _analyzeQuery(query);
+  }
+
+  // Microphone tap: start listening, or finish the current utterance.
+  void _onMicrophoneTap() {
+    if (_voice.isStarting) return;
+    switch (_voice.state) {
+      case VoiceInputState.listening:
+        _voice.stopAndFinalize();
+        break;
+      case VoiceInputState.processing:
+        break; // one session at a time
+      default:
+        _startVoice();
     }
+  }
+
+  Future<void> _startVoice() async {
+    // Never let the assistant's own voice be recorded.
+    final FocusScopeNode focus = FocusScope.of(context);
+    _textController.clear();
+    setState(() => recognizedText = "Listening... please speak");
+    await _ttsService.stop();
+    focus.unfocus();
+    await _voice.start();
+  }
+
+  void _submitTypedText() {
+    if (_voice.state == VoiceInputState.processing) return;
+    if (_voice.state == VoiceInputState.listening) {
+      // Typed input wins; release the microphone first.
+      _voice.cancel();
+    }
+    _analyzeQuery(_textController.text);
+    // Typed queries are not a voice session, so return the panel to idle.
+    _voice.reset();
   }
 
   @override
@@ -549,28 +591,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.all(20),
                   child: Column(
                     children: [
-                      InkWell(
-                        onTap: listen,
-                        borderRadius: BorderRadius.circular(40),
-                        child: CircleAvatar(
-                          radius: 36,
-                          backgroundColor: Colors.blue.shade50,
-                          child: Icon(
-                            isListening ? Icons.mic : Icons.mic_none,
-                            size: 36,
-                            color: Colors.blue.shade700,
-                          ),
-                        ),
-                      ),
-
-                      const SizedBox(height: 10),
-
-                      const Text(
-                        "Tap microphone to speak",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey,
-                        ),
+                      VoiceInputPanel(
+                        controller: _voice,
+                        onMicrophoneTap: _onMicrophoneTap,
                       ),
 
                       const SizedBox(height: 16),
@@ -605,7 +628,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: double.infinity,
                         height: 52,
                         child: FilledButton.icon(
-                          onPressed: _submitTypedText,
+                          onPressed: _voice.state == VoiceInputState.processing
+                              ? null
+                              : _submitTypedText,
                           icon: const Icon(Icons.analytics_outlined,
                               size: 20),
                           label: const Text("Analyze & Recommend",

@@ -88,8 +88,18 @@ class _LoginScreenState extends State<LoginScreen>
 
     return Scaffold(
       body: Container(
-        // Blueish gradient background — colorful & attractive.
-        decoration: BoxDecoration(color: Color.fromARGB(255, 0, 55, 175)),
+        // Full-screen background image with a blue overlay for readability.
+        decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 0, 55, 175), // fallback if image missing
+          image: DecorationImage(
+            image: AssetImage('assets/bg.png'),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+              Color(0x99002266),
+              BlendMode.darken,
+            ),
+          ),
+        ),
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(

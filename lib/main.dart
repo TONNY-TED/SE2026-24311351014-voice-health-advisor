@@ -23,14 +23,12 @@ import 'package:healthcare_assistant/widgets/onboarding_tutorial.dart';
 
 // Application entry point
 void main() {
-  runApp(HealthcareAssistantApp(settings: AppSettingsService()));
+  runApp(const HealthcareAssistantApp());
 }
 
 // Main Application Widget (loads persisted theme + font scale first).
 class HealthcareAssistantApp extends StatefulWidget {
-  final AppSettingsService? settings;
-
-  HealthcareAssistantApp({super.key, this.settings});
+  const HealthcareAssistantApp({super.key});
 
   @override
   State<HealthcareAssistantApp> createState() => _HealthcareAssistantAppState();
@@ -71,7 +69,12 @@ class _HealthcareAssistantAppState extends State<HealthcareAssistantApp> {
             ),
           ),
         ),
-        home: AuthGate(settings: _settings),
+        // Show the loading screen inside the app so Directionality is available.
+        home: _ready
+            ? AuthGate(settings: _settings)
+            : const Scaffold(
+                body: Center(child: CircularProgressIndicator()),
+              ),
       ),
     );
   }

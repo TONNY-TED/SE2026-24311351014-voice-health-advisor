@@ -196,6 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String _userName = '';
   String _userEmail = '';
   bool _ttsEnabled = false;
+  String _ttsLanguage = 'en-US';
 
   @override
   void initState() {
@@ -251,6 +252,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Runs the existing clinical knowledge-base + NLP pipeline on a query.
   // Only ever called with a final (complete) transcript or typed text.
+
+  // Advice is spoken in the language of the knowledge-base entry it came from:
+  // Chichewa entries are spoken with the Chichewa voice, English entries in English.
+  String _ttsLanguageFor(KbEntry? entry) {
+    final source = entry?.category.toLowerCase() ?? '';
+    return source.contains('chichewa') ? 'ny-NG' : 'en-US';
+  }
+
   void _analyzeQuery(String text) {
     final String query = text.trim();
     if (query.isEmpty) {
@@ -274,6 +283,8 @@ class _HomeScreenState extends State<HomeScreen> {
           healthAdvice = result.isEmergency ? 'EMERGENCY:\n$body' : body;
         });
         _logHistory(query, result.topic, result.intent.name);
+        _ttsLanguage = _ttsLanguageFor(result.entry);
+        _ttsService.setLanguage(_ttsLanguage);
         _speakAdvice();
         return;
       }
@@ -288,6 +299,8 @@ class _HomeScreenState extends State<HomeScreen> {
         healthAdvice = '${topic.title}: ${topic.advice}';
       });
       _logHistory(query, topic.title, 'wellness');
+      // Wellness fallbacks come from English topics, so keep the English voice.
+      _ttsLanguage = 'en-US';
     } else {
       setState(() {
         recognizedText = query;
@@ -301,6 +314,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _speakAdvice() async {
     if (_ttsEnabled) {
+      await _ttsService.setLanguage(_ttsLanguage);
       await _ttsService.speak(healthAdvice);
     }
   }
@@ -756,7 +770,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     setState(() => _ttsEnabled = !_ttsEnabled);
                     await widget.settings.setTtsEnabled(_ttsEnabled);
                     if (_ttsEnabled) {
-                      await _ttsService.speak(healthAdvice);
+                      await _speakAdvice();
                     } else {
                       await _ttsService.stop();
                     }

@@ -9,18 +9,30 @@ class TtsService {
 
   bool _isInitialized = false;
   bool _enabled = false;
+  String _language = 'en-US';
 
   bool get enabled => _enabled;
+
+  // Current TTS language, e.g. "en-US" or Chichewa "ny-NG".
+  String get language => _language;
 
   // Set whether TTS is active. Persisted by AppSettingsService.
   void setEnabled(bool value) {
     _enabled = value;
   }
 
+  // Set the language the advice is spoken in, e.g. "en-US" or "ny-NG".
+  // Used when the matched knowledge-base entry is in another language.
+  Future<void> setLanguage(String language) async {
+    _language = language;
+    if (!_isInitialized) return;
+    await _tts.setLanguage(language);
+  }
+
   // Initialize TTS once (language, pitch, speech rate).
   Future<void> initialize() async {
     if (_isInitialized) return;
-    await _tts.setLanguage("en-US");
+    await _tts.setLanguage(_language);
     await _tts.setPitch(1.0);
     await _tts.setSpeechRate(0.5);
     _isInitialized = true;

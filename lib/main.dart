@@ -20,6 +20,7 @@ import 'package:healthcare_assistant/screens/history_screen.dart';
 import 'package:healthcare_assistant/screens/profile_screen.dart';
 import 'package:healthcare_assistant/widgets/main_shell.dart';
 import 'package:healthcare_assistant/widgets/onboarding_tutorial.dart';
+import 'package:healthcare_assistant/widgets/loading_screen.dart';
 import 'package:healthcare_assistant/widgets/voice_input_panel.dart';
 
 
@@ -96,6 +97,10 @@ class _AuthGateState extends State<AuthGate> {
   final AuthService _auth = AuthService();
   bool? _loggedIn;
 
+  // True while the welcome loading screen is shown between the intro slides
+  // and the login screen.
+  bool _showLoading = false;
+
   @override
   void initState() {
     super.initState();
@@ -151,7 +156,7 @@ class _AuthGateState extends State<AuthGate> {
         showSkip: true,
         onSkip: () {
           widget.settings.setIntroShown(true);
-          setState(() {});
+          _startLoadingSequence();
         },
         onNext: () {
           // onNext is handled by page change; finish called when last slide reached
@@ -159,12 +164,27 @@ class _AuthGateState extends State<AuthGate> {
         onBack: () {},
         onFinish: () {
           widget.settings.setIntroShown(true);
-          setState(() {});
+          _startLoadingSequence();
         },
       );
     }
 
+    // Welcome loading screen between the intro slides and the login screen.
+    if (_showLoading) {
+      return const WelcomeLoadingScreen();
+    }
+
     return LoginScreen(onLoggedIn: () => setState(() => _loggedIn = true));
+  }
+
+  // After the intro slides are done (or skipped), show the animated loading
+  // screen, then hand over to the login screen.
+  void _startLoadingSequence() {
+    setState(() => _showLoading = true);
+    Future<void>.delayed(const Duration(seconds: 2), () {
+      if (!mounted) return;
+      setState(() => _showLoading = false);
+    });
   }
 }
 

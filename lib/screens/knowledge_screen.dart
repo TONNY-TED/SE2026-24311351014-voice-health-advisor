@@ -1,4 +1,5 @@
-// Knowledge Screen: browse the 24-entry clinical knowledge base.
+// Knowledge Screen: browse the clinical knowledge base.
+// English (24 entries) + Chichewa (50 entries, C001-C050).
 // Search + category filter; tap an entry for content, tips and source.
 // Read-only view over KnowledgeBaseService — no logic changes.
 
@@ -30,6 +31,10 @@ class _KnowledgeScreenState extends State<KnowledgeScreen> {
     // Load the knowledge base in the background.
     KnowledgeBaseService.load().then((list) {
       if (mounted) setState(() => _entries = list);
+    });
+    // Also load the Chichewa knowledge base (C001-C050).
+    KnowledgeBaseService.loadChichewa().then((list) {
+      if (mounted) setState(() => _entries = [..._entries, ...list]);
     });
     // Refresh the list on every keystroke.
     _searchController.addListener(() => setState(() {}));
